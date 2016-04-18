@@ -1,3 +1,11 @@
-/**
- * Created by crisanalexandra on 4/14/2016.
- */
+'use strict';
+
+module.exports.init = function(app) {
+    var modelsPath = app.get('root') + '/app/models/';
+
+    [
+        'user'
+    ].forEach(function(model) {
+            require(modelsPath + model);
+        });
+};
