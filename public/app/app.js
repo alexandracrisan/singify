@@ -1,15 +1,20 @@
 (function () {
     'use strict';
 
-    angular.module('appMy', ['ui.router'])
+    angular.module('app', ['ui.router'])
         .config(function($stateProvider, $urlRouterProvider) {
             $urlRouterProvider.otherwise('/');
 
             $stateProvider
                 .state('/', {
                     url: '/',
-                    templateUrl: 'app/login/partials/homePage.html'
-
+                    templateUrl: 'app/account/partials/home-page.html',
+                    controller: 'MainCtrl as mainCtrl'
+                })
+                .state('/signup', {
+                    url: '/signup',
+                    templateUrl: 'app/account/partials/signup.html',
+                    controller: 'SignupCtrl as signupCtrl'
                 })
 
         });

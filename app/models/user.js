@@ -54,7 +54,13 @@ var UserSchema = new Schema({
     }
 });
 
-
+//UserSchema.pre('save', function(next) {
+//    var self = this;
+//    this.username = this.username || shortId.generate();
+//    if (!(this.isNew)) {
+//        return next();
+//    }
+//});
 
 /**
  * Create a new user with the specified properties

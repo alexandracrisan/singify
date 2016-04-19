@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="appMy">
+<html ng-app="app">
 <head>
     <!-- META -->
     <meta charset="utf-8">
@@ -17,9 +17,15 @@
         <ui-view></ui-view>
     </div>
 
-    <script src="node_modules/angular/angular.min.js"></script><!-- load angular -->
+    <script src="node_modules/angular/angular.min.js"></script>
     <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="app/app.js"></script>
 
+    <!--  Services -->
+    <script src="app/account/services/SignupService.js"></script>
+
+    <!-- Controllers -->
+    <script src="app/account/controllers/MainController.js"></script>
+    <script src="app/account/controllers/SignupController.js"></script>
 </body>
 </html>
