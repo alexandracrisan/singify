@@ -54,4 +54,8 @@ function initExpress(app) {
         res.locals.baseUrl = config.baseUrl;
         next();
     });
+
+    if (config.serveStatic) {
+        app.use(serveStatic(path.join(root, 'public')));
+    }
 };
