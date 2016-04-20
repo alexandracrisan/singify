@@ -5,19 +5,16 @@
         .module('app')
         .factory('SigninService', SigninService);
 
-    SigninService.$inject = ['$http', '$q'];
+    SigninService.$inject = ['$q', 'UtilService'];
 
-    function SigninService($http, $q) {
+    function SigninService($q, UtilService) {
         var factory = {},
-            base = 'http://localhost:3002/signin';
+            base = UtilService.baseUrl + '/signin';
 
         factory.loginUser = function(userCredentials) {
             var deffer = $q.defer();
-            var request = $http({
-                method: 'POST',
-                url: base,
-                data: userCredentials
-            });
+            var request = UtilService.postEntity(base, userCredentials);
+
             request
                 .success(function(data, status, headers, config){
                     deffer.resolve(data);
@@ -26,6 +23,7 @@
                     deffer.reject(status);
                     console.log(status);
                 });
+
             return deffer.promise;
         };
 
