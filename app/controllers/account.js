@@ -10,8 +10,9 @@ function signup(req, res, next) {
     req.session.historyData = req.body;
 
     if (req.body.password !== req.body.password_confirm) {
-        req.session.historyData.errorMessage = 'Password confirmation should match';
-        return res.redirect('signup');
+        var err = req.session.historyData.errorMessage = 'Password confirmation should match';
+        //return res.redirect('signup');
+        res.json(err);
     }
 
     var userData = _.pick(req.body, 'name', 'email', 'password');

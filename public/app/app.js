@@ -16,6 +16,11 @@
                     templateUrl: 'app/account/partials/signup.html',
                     controller: 'SignupCtrl as signupCtrl'
                 })
+                .state('/signin', {
+                    url: '/signin',
+                    templateUrl: 'app/authentication/partials/signin.html',
+                    controller: 'SigninCtrl as signinCtrl'
+                })
 
         });
 })();

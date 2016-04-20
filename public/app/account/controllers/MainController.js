@@ -10,6 +10,9 @@
     function MainCtrl($scope, $state) {
         this.showSignUp = function() {
             $state.go('/signup');
+        };
+        this.showSignin = function() {
+            $state.go('/signin');
         }
     }
 })();

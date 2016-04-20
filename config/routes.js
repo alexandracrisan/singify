@@ -8,9 +8,10 @@ module.exports.init = function(app) {
     if (config.accessRoutes) {
         app.use('/', require(routesPath + '/account'));
     }
+    app.use('/', require(routesPath + '/authentication'));
     app.get('*', function(req, res) {
         res.sendFile(app.get('root') + '/public/index.html');
     });
-    //app.use('/', require(routesPath + '/authentication'));
+
     //app.use('/', require(routesPath + '/user'));
 };
