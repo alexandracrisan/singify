@@ -15,6 +15,7 @@
             SigninService.loginUser(self.current_user_ui).then(
                 function(response) {
                     console.log(response);
+                    $state.go('/dashboard');
                 },
                 function(error) {
                     self.current_user_ui = {};

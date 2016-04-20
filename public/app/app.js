@@ -21,6 +21,11 @@
                     templateUrl: 'app/authentication/partials/signin.html',
                     controller: 'SigninCtrl as signinCtrl'
                 })
+                .state('/dashboard', {
+                    url: '/dashboard',
+                    templateUrl: 'app/user-dashboard/partials/user-dashboard.html'
+                    //controller: 'SigninCtrl as signinCtrl'
+                })
 
         });
 })();
