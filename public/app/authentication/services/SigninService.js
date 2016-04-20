@@ -1,32 +1,32 @@
-(function() {
-    'use strict';
+(function () {
+	'use strict';
 
-    angular
-        .module('app')
-        .factory('SigninService', SigninService);
+	angular
+		.module('app')
+		.factory('SigninService', SigninService);
 
-    SigninService.$inject = ['$q', 'UtilService'];
+	SigninService.$inject = ['$q', 'UtilService'];
 
-    function SigninService($q, UtilService) {
-        var factory = {},
-            base = UtilService.baseUrl + '/signin';
+	function SigninService($q, UtilService) {
+		var factory = {},
+			base = UtilService.baseUrl + '/signin';
 
-        factory.loginUser = function(userCredentials) {
-            var deffer = $q.defer();
-            var request = UtilService.postEntity(base, userCredentials);
+		factory.loginUser = function (userCredentials) {
+			var deffer = $q.defer();
+			var request = UtilService.postEntity(base, userCredentials);
 
-            request
-                .success(function(data, status, headers, config){
-                    deffer.resolve(data);
-                }).
-                error(function(data, status, headers, config){
-                    deffer.reject(status);
-                    console.log(status);
-                });
+			request
+				.success(function (data, status, headers, config) {
+					deffer.resolve(data);
+				}).
+				error(function (data, status, headers, config) {
+					deffer.reject(status);
+					console.log(status);
+				});
 
-            return deffer.promise;
-        };
+			return deffer.promise;
+		};
 
-        return factory;
-    }
+		return factory;
+	}
 })();

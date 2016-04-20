@@ -5,24 +5,24 @@ var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
-module.exports = function() {
-    passport.use('local', new LocalStrategy({
-            usernameField: 'email',
-            passwordField: 'password'
-        },
-        function(email, password, done) {
-            User.authenticate(email, password, function(err, user) {
-                if (err) {
-                    return done(err);
-                }
+module.exports = function () {
+	passport.use('local', new LocalStrategy({
+			usernameField: 'email',
+			passwordField: 'password'
+		},
+		function (email, password, done) {
+			User.authenticate(email, password, function (err, user) {
+				if (err) {
+					return done(err);
+				}
 
-                if (!user) {
-                    return done(null, false, { message: 'Invalid email or password.' });
-                }
+				if (!user) {
+					return done(null, false, {message: 'Invalid email or password.'});
+				}
 
-                return done(null, user);
-            });
-        }
-    ));
+				return done(null, user);
+			});
+		}
+	));
 };
 

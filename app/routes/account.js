@@ -9,3 +9,4 @@ const config = require('../../config/');
 router.post('/signup', accountCtrl.signup);
 
 module.exports = router;
+

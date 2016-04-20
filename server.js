@@ -22,18 +22,18 @@ require('./config/routes').init(app);
  * Start the app if not loaded by another module
  */
 if (!module.parent) {
-    server = http.createServer(app);
+	server = http.createServer(app);
 
-    server.listen(config.port || 3000, config.hostname || 'localhost', function() {
-        var addr = server.address();
-        console.log(
-            '%s is running, listening on %s:%s, environment: %s',
-            config.app.name,
-            addr.address,
-            addr.port,
-            ENV.toLowerCase()
-        );
-    });
+	server.listen(config.port || 3000, config.hostname || 'localhost', function () {
+		var addr = server.address();
+		console.log(
+			'%s is running, listening on %s:%s, environment: %s',
+			config.app.name,
+			addr.address,
+			addr.port,
+			ENV.toLowerCase()
+		);
+	});
 }
 
 module.exports = app;
