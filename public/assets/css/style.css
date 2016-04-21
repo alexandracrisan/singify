@@ -45,3 +45,43 @@
 		left: -100%;
 	}
 }
+/** Upload file section
+*/
+
+.upload-song {
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+
+.droppable {
+	background: slateblue;
+	color: #fff;
+	opacity: 0.85;
+	text-align: center;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	visibility: hidden;
+}
+.droppable .dropppable-text {
+	position: relative;
+	top: 45px;
+	height: 0;
+}
+
+
+.droppable.dragover {
+	background: slateblue;
+}
+
+[draggable=true] {
+	-khtml-user-drag: element;
+}
+
+.form-file {
+	height: 15em;
+	padding-top: 5em;
+}

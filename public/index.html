@@ -18,8 +18,10 @@
 		<ui-view></ui-view>
 	</div>
 
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/angular/angular.min.js"></script>
 	<script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="node_modules/jDataView.js"></script>
 
 	<!--  Start app -->
 	<script src="app/app.js"></script>
@@ -28,11 +30,13 @@
 	<script src="app/util/UtilService.js"></script>
 	<script src="app/account/services/SignupService.js"></script>
 	<script src="app/authentication/services/SigninService.js"></script>
+	<script src="app/user-dashboard/services/KaraokeService.js"></script>
 
 
 	<!-- Controllers -->
 	<script src="app/account/controllers/MainController.js"></script>
 	<script src="app/account/controllers/SignupController.js"></script>
 	<script src="app/authentication/controllers/SigninController.js"></script>
+	<script src="app/user-dashboard/controllers/KaraokeController.js"></script>
 </body>
 </html>

@@ -23,8 +23,8 @@
 				})
 				.state('/dashboard', {
 					url: '/dashboard',
-					templateUrl: 'app/user-dashboard/partials/user-dashboard.html'
-					//controller: 'SigninCtrl as signinCtrl'
+					templateUrl: 'app/user-dashboard/partials/user-dashboard.html',
+					controller: 'KaraokeCtrl as karaokeCtrl'
 				})
 
 		});

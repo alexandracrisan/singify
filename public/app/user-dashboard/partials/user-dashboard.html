@@ -1,1 +1,43 @@
-<h1>welcome</h1>
+<form class="col-md-6 col-md-offset-3 form-file">
+	<div class="form-group">
+		<label for="name">Title of your song</label>
+		<input type="text" class="form-control" id="name" ng-model="karaokeCtrl.song.name" placeholder="title">
+	</div>
+
+	<div class="form-group">
+		<div id="upload-song">
+			<!--<div class="pull-left">-->
+				<!--<span class="glyphicon glyphicon-camera"></span>-->
+				<!--<span>Add file</span>-->
+			<!--</div>-->
+			<input
+				class="upload-file upload-song-input"
+				type="file"
+				name="file"
+				accept="audio/*"
+				ng-model="karaokeCtrl.song"
+				onchange="angular.element(this).scope().fileSelectHandler(event)"
+				/>
+
+			<div class="droppable" id="droppable">
+				<div class="dropppable-text">
+					<p>Drag files here</p>
+				</div>
+				<!--<input-->
+					<!--class="upload-file upload-song-input"-->
+					<!--type="file"-->
+					<!--name="file"-->
+					<!--ng-file-select="onFileSelect($files)"-->
+					<!--ng-click="karaokeCtrl.cli($event)"-->
+					<!--/>-->
+			</div>
+		</div>
+		<div class="pull-right">
+			<button
+				class="btn btn-primary"
+				type="submit">
+				Post
+			</button>
+		</div>
+	</div>
+</form>
