@@ -9,9 +9,9 @@ module.exports.init = function (app) {
 		app.use('/', require(routesPath + '/account'));
 	}
 	app.use('/', require(routesPath + '/authentication'));
+	app.use('/', require(routesPath + '/dashboard'));
+
 	app.get('*', function (req, res) {
 		res.sendFile(app.get('root') + '/public/index.html');
 	});
-
-	//app.use('/', require(routesPath + '/user'));
 };

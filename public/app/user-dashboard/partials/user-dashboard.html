@@ -1,7 +1,15 @@
-<form class="col-md-6 col-md-offset-3 form-file">
+<form class="col-md-6 col-md-offset-3 form-file"
+		name="uploadform"
+		method="post"
+		enctype="multipart/form-data">
 	<div class="form-group">
-		<label for="name">Title of your song</label>
-		<input type="text" class="form-control" id="name" ng-model="karaokeCtrl.song.name" placeholder="title">
+		<label>Title of your song</label>
+		<input type="text"
+			class="form-control"
+			placeholder="title"
+			name="title"
+		 	ng-model="karaokeCtrl.title"
+		  autocomplete="off">
 	</div>
 
 	<div class="form-group">
@@ -35,7 +43,8 @@
 		<div class="pull-right">
 			<button
 				class="btn btn-primary"
-				type="submit">
+				type="submit"
+				ng-click="karaokeCtrl.upload(uploadform)">
 				Post
 			</button>
 		</div>

@@ -5,10 +5,11 @@
 		.module('app')
 		.controller('KaraokeCtrl', KaraokeCtrl);
 
-	KaraokeCtrl.$inject = ['$state', '$scope', 'UtilKaraokeService'];
+	KaraokeCtrl.$inject = ['$state', '$scope', 'UtilKaraokeService', 'KaraokeService'];
 
-	function KaraokeCtrl($state, $scope, UtilKaraokeService) {
+	function KaraokeCtrl($state, $scope, UtilKaraokeService, KaraokeService) {
 		this.song= {};
+		this.title = '';
 		var fileDrag = document.getElementById('upload-song');
 		var dropable = $('.droppable');
 		var lastenter;
@@ -41,6 +42,7 @@
 			dropable.css('visibility', 'hidden');
 
 			var droppedFiles = $event.target.files || $event.dataTransfer.files;
+			console.log(droppedFiles);
 
 			var reader = new FileReader();
 
@@ -59,12 +61,31 @@
 					// no ID3v1 data found.
 				//	currentSong.innerHTML = 'Playing';
 				}
-
+				console.log(this.result);
 			};
 
-			console.log(droppedFiles[0]);
+console.log($event.target.files);
 			reader.readAsArrayBuffer(droppedFiles[0]);
 		};
+
+		this.upload = function($form) {
+			//console.log($form);
+			//var data = new FormData($form);
+			//console.log(data);
+			var file = this.song;
+			console.dir(file);
+
+			var upload = {
+				file: this.song,
+				title: this.title
+			};
+			KaraokeService.uploadSong(upload).then(function(response) {
+				console.log(response);
+			},
+			function(error) {
+				console.log(error);
+			});
+		}
 	}
 })();
 

@@ -1,7 +1,7 @@
 'use strict';
 
-const passport = require('passport');
-const config = require('../../config');
+var passport = require('passport');
+var config = require('../../config');
 
 
 module.exports.signin = function (req, res, next) {
