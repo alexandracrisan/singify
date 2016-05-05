@@ -17,6 +17,10 @@ module.exports = {
 		resave: false,                            // save automatically to session store
 		saveUninitialized: true                   // save new sessions
 	},
+	filestore: {
+		storagetype: 'disk',
+		readertype: 'disk'
+	},
 
 	//assets: {
 	//    url: 'http://localhost:3000/files'        // or http://*.cloudfront.net

@@ -4,7 +4,8 @@ module.exports.init = function (app) {
 	var modelsPath = app.get('root') + '/app/models/';
 
 	[
-		'user'
+		'user',
+		'song'
 	].forEach(function (model) {
 			require(modelsPath + model);
 		});

@@ -1,10 +1,10 @@
 'use strict';
 
-const express = require('express');
-const router = express.Router();
-const authCtrl = require('../controllers/authentication');
-const passport = require('passport');
-const config = require('../../config/');
+var express = require('express');
+var router = express.Router();
+var authCtrl = require('../controllers/authentication');
+var passport = require('passport');
+var config = require('../../config/');
 
 
 if (config.accessRoutes) {

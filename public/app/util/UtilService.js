@@ -19,6 +19,17 @@
 			})
 		};
 
+		this.postMultiPart = function(url, data) {
+			return $http({
+				url: url,
+				method: 'POST',
+				data: data,
+				dataType: 'json',
+				processData: false,
+				contentType: false,
+				cache: false
+			})
+		};
 
 		this.getEntity = function (url) {
 			return $http({

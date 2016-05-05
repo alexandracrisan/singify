@@ -14,11 +14,15 @@
 		factory.uploadSong = function (song) {
 			var deffer = $q.defer();
 			console.log(song);
-			var fd = new FormData();
-			fd.append('file', song.file);
-			fd.append('title', song.title);
-			console.log(fd);
-			var request = UtilService.postEntity(base, fd);
+		//var fd = new FormData();
+			//fd.append('file', song.file);
+			//fd.append('fileContent', song.fileContent);
+			//fd.append('title', song.title);
+			//console.log(fd);
+			var request = $http.post(base, song, {
+				transformRequest: angular.identity,
+				headers: {'Content-Type': undefined}
+			});
 
 			request
 				.success(function (data, status, headers, config) {

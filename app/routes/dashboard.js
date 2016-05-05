@@ -1,14 +1,21 @@
 'use strict';
 
-const express = require('express');
-const router = express.Router();
-const dashboardCtrl = require('../controllers/dashboard');
-const passport = require('passport');
-const config = require('../../config/');
-const auth = require('../middlewares/authentication');
+var express = require('express');
+var router = express.Router();
+var dashboardCtrl = require('../controllers/dashboard');
+var passport = require('passport');
+var config = require('../../config/');
+var auth = require('../middlewares/authentication');
+var upload = require('../../config/multer').init();
 
 
-router.post('/dashboard', auth.ensured, dashboardCtrl.create);
+router.post(
+	'/dashboard',
+	auth.ensured,
+	upload.single('file'),
+	dashboardCtrl.create,
+	dashboardCtrl.jsonPost
+);
 
 //router.get('/signout', authCtrl.signout);
 

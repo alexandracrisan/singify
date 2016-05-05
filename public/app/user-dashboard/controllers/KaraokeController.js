@@ -8,7 +8,9 @@
 	KaraokeCtrl.$inject = ['$state', '$scope', 'UtilKaraokeService', 'KaraokeService'];
 
 	function KaraokeCtrl($state, $scope, UtilKaraokeService, KaraokeService) {
-		this.song= {};
+		this.song = {};
+		this.songContent = {};
+		this.processedSong = {};
 		this.title = '';
 		var fileDrag = document.getElementById('upload-song');
 		var dropable = $('.droppable');
@@ -34,6 +36,8 @@
 			return false;
 		}
 
+		var self = this;
+
 		$scope.fileSelectHandler = function($event) {
 			console.log("Changed");
 
@@ -46,40 +50,45 @@
 
 			var reader = new FileReader();
 
-			reader.onload = function(fileEvent) {
+			reader.onloadend = function(fileEvent) {
 				var data = fileEvent.target.result;
-				UtilKaraokeService.initAudio(data);
-
-				var dv = new jDataView(this.result);
-
-				if (dv.getString(3, dv.byteLength - 128) == 'TAG') {
-					var title = dv.getString(30, dv.tell());
-					var artist = dv.getString(30, dv.tell());
-					var album = dv.getString(30, dv.tell());
-					var year = dv.getString(4, dv.tell());
-				} else {
-					// no ID3v1 data found.
-				//	currentSong.innerHTML = 'Playing';
-				}
-				console.log(this.result);
+			//	//reader.readAsDataURL($event.target.files[0]);
+				self.songContent = data;
+				console.log(fileEvent);
+				//self.songContent = data;
+			//	UtilKaraokeService.initAudio(data);
+			//	var dv = new jDataView(this.result);
+			//
+			//	if (dv.getString(3, dv.byteLength - 128) == 'TAG') {
+			//		var title = dv.getString(30, dv.tell());
+			//		var artist = dv.getString(30, dv.tell());
+			//		var album = dv.getString(30, dv.tell());
+			//		var year = dv.getString(4, dv.tell());
+			//	} else {
+			//		// no ID3v1 data found.
+			//	//	currentSong.innerHTML = 'Playing';
+			//	}
+			//	console.log(dv);
 			};
 
-console.log($event.target.files);
-			reader.readAsArrayBuffer(droppedFiles[0]);
+			//var stuff = reader.readAsArrayBuffer(self.song);
+			self.song = droppedFiles[0];
+			reader.readAsBinaryString(droppedFiles[0]);
 		};
 
 		this.upload = function($form) {
-			//console.log($form);
-			//var data = new FormData($form);
+			console.log($form);
+			var data = new FormData($form);
 			//console.log(data);
-			var file = this.song;
+			var file = self.song;
 			console.dir(file);
 
 			var upload = {
-				file: this.song,
+				file: self.song,
+				fileContent: self.songContent,
 				title: this.title
 			};
-			KaraokeService.uploadSong(upload).then(function(response) {
+			KaraokeService.uploadSong(data).then(function(response) {
 				console.log(response);
 			},
 			function(error) {
