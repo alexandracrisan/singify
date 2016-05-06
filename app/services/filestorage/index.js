@@ -9,7 +9,6 @@ function FileStorage(opts) {
 	 *  we support only `disk` storage for now
 	 */
 	if (opts.type === 'disk') {
-		console.log('disk index');
 		this.storage = DiskStorage;
 	}
 }

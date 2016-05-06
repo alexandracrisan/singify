@@ -15,7 +15,7 @@
 				function(response) {
 					console.log(response);
 					SessionService.setCurrentUser(response);
-					$state.go('/dashboard', {loggedUser: response});
+					$state.go('/dashboard');
 				},
 				function(error) {
 					$scope.current_user_ui = {};
