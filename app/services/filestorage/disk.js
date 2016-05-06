@@ -27,12 +27,12 @@ function store(opts, callback) {
 	var is = fs.createReadStream(opts.filepath);
 	var os = fs.createWriteStream(targetPath);
 console.log('tagert', targetPath);
-	is.on('error', function(err) {
-		if (err) {
-			console.log('service', err);
-			return callback(err);
-		}
-	});
+	//is.on('error', function(err) {
+	//	if (err) {
+	//		console.log('service', err);
+	//		return callback(err);
+	//	}
+	//});
 	console.log(4567890);
 	//os.on('close', function() {
 	//	//delete file from temp folder
@@ -41,12 +41,22 @@ console.log('tagert', targetPath);
 	//			console.log('unlink', err);
 	//			return callback(err);
 	//		}
+os.on('open', function(fd) {
+	is.on('data', function(data) {
+		console.log('loading');
+		os.write(data);
+	});
+	is.on('end', function() {
+		console.log('finn');
+		callback(null, {
+			status: 200,
+			filename: opts.filename,
+			message: 'File stored.'
+		});
+		os.end();
+	})
+})
 
-			callback(null, {
-				status: 200,
-				filename: opts.filename,
-				message: 'File stored.'
-			});
 			console.log(4567890);
 	//	});
 	//});
