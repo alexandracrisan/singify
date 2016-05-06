@@ -14,7 +14,6 @@ module.exports.create = createPost;
 module.exports.jsonPost = jsonPost;
 
 function createPost(req, res, next) {
-	console.log(34);
 	var is,
 			tempPath,
 			extension;
@@ -42,20 +41,12 @@ function createPost(req, res, next) {
 				message: 'Title is required!'
 			});
 		}
-console.log('tempPath',tempPath);
-console.log('postData.filename',postData.filename);
-console.log('file',file);
+
 		FileStorage.store({
 			filepath: tempPath,
 			filename: postData.filename,
 			file: file
 		}, function(err, file) {
-			//if (err) {
-			//	return res.status(400).json({
-			//		type: err.type,
-			//		message: err.message
-			//	});
-			//}
 
 			if (err) {
 				console.log('ctrl', err);
@@ -75,6 +66,5 @@ console.log('file',file);
 }
 
 function jsonPost(req, res, next) {
-	console.log('post',  req.resources.post);
 	res.json(req.resources.post);
 }

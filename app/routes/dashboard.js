@@ -17,7 +17,4 @@ router.post(
 	dashboardCtrl.jsonPost
 );
 
-//router.get('/signout', authCtrl.signout);
-
-
 module.exports = router;

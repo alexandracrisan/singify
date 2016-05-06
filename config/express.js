@@ -58,4 +58,4 @@ function initExpress(app) {
 	if (config.serveStatic) {
 		app.use(serveStatic(path.join(root, 'public')));
 	}
-};
+}

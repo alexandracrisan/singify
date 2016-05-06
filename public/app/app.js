@@ -12,6 +12,9 @@
 				})
 				.state('/dashboard', {
 					url: '/dashboard',
+					params: {
+						loggedUser: null
+					},
 					templateUrl: 'app/user-dashboard/partials/user-dashboard.html',
 					controller: 'KaraokeCtrl as karaokeCtrl'
 				})

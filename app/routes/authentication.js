@@ -12,5 +12,4 @@ if (config.accessRoutes) {
 }
 //router.get('/signout', authCtrl.signout);
 
-
 module.exports = router;

@@ -8,6 +8,5 @@ module.exports.init = function(app) {
 	}
 
 	instance = multer({ storage: storage });
-console.log('instance,', instance);
 	return instance;
 };

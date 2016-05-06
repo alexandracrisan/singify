@@ -5,14 +5,12 @@
 		.module('app')
 		.controller('KaraokeCtrl', KaraokeCtrl);
 
-	KaraokeCtrl.$inject = ['$state', '$scope', 'UtilKaraokeService', 'KaraokeService', 'UtilService'];
+	KaraokeCtrl.$inject = ['$state', '$scope', 'UtilKaraokeService', 'KaraokeService', 'UtilService', 'SessionService'];
 
-	function KaraokeCtrl($state, $scope, UtilKaraokeService, KaraokeService, UtilService) {
+	function KaraokeCtrl($state, $scope, UtilKaraokeService, KaraokeService, UtilService, SessionService) {
 		this.base = UtilService.baseUrl + '/dashboard';
-		this.song = {};
-		this.songContent = {};
-		this.processedSong = {};
-		this.title = '';
+		this.loggedUser = SessionService.getCurrentUser();
+
 		var fileDrag = document.getElementById('upload-song');
 		var dropable = $('.droppable');
 		var lastenter;
@@ -69,26 +67,6 @@
 
 			reader.readAsArrayBuffer(droppedFiles[0]);
 		};
-
-		this.upload = function($form) {
-			console.log($form);
-			var data = new FormData($form);
-			//console.log(data);
-			var file = self.song;
-			console.dir(file);
-
-			var upload = {
-				file: self.song,
-				fileContent: self.songContent,
-				title: this.title
-			};
-			KaraokeService.uploadSong(data).then(function(response) {
-				console.log(response);
-			},
-			function(error) {
-				console.log(error);
-			});
-		}
 	}
 })();
 

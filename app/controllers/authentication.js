@@ -7,7 +7,7 @@ var config = require('../../config');
 module.exports.signin = function (req, res, next) {
 	passport.authenticate('local', function (err, user, info) {
 		if (err || !user) {
-			// return res.status(400).send(info);
+
 			return handleResponse(400, info, req, res);
 		}
 		req.logIn(user, function (err) {
@@ -31,7 +31,6 @@ function handleResponse(status, data, req, res) {
 			req.session.historyData = data;
 			res.redirect('/signin');
 		},
-		// just in case :)
 		text: function () {
 			req.session.historyData = data;
 			res.redirect('/signin');

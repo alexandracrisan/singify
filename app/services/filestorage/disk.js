@@ -26,40 +26,25 @@ function store(opts, callback) {
 	var targetPath = path.join(destination, opts.filename);
 	var is = fs.createReadStream(opts.filepath);
 	var os = fs.createWriteStream(targetPath);
-console.log('tagert', targetPath);
-	//is.on('error', function(err) {
-	//	if (err) {
-	//		console.log('service', err);
-	//		return callback(err);
-	//	}
-	//});
-	console.log(4567890);
-	//os.on('close', function() {
-	//	//delete file from temp folder
-	//	fs.unlink(opts.filepath, function(err) {
-	//		if (err) {
-	//			console.log('unlink', err);
-	//			return callback(err);
-	//		}
-os.on('open', function(fd) {
-	is.on('data', function(data) {
-		console.log('loading');
-		os.write(data);
-	});
-	is.on('end', function() {
-		console.log('finn');
-		callback(null, {
-			status: 200,
-			filename: opts.filename,
-			message: 'File stored.'
-		});
-		os.end();
-	})
-})
 
-			console.log(4567890);
-	//	});
-	//});
+	os.on('open', function(fd) {
+
+		is.on('data', function(data) {
+			os.write(data);
+		});
+
+		is.on('end', function() {
+
+			callback(null, {
+				status: 200,
+				filename: opts.filename,
+				message: 'File stored.'
+			});
+
+			os.end();
+		})
+	});
+
 }
 
 
@@ -78,7 +63,7 @@ function streamFile(filename, outputStream, callback) {
 	});
 
 	outputStream.on('close', function() {
-		// TODO: better message
+
 		callback(null, {
 			status: 200,
 			filename: filename,

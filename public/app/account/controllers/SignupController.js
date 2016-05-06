@@ -5,9 +5,9 @@
 		.module('app')
 		.controller('SignupCtrl', SignupCtrl);
 
-	SignupCtrl.$inject = ['SignupService', '$state', '$scope'];
+	SignupCtrl.$inject = ['SignupService', '$state', '$scope', 'SessionService'];
 
-	function SignupCtrl(SignupService, $state, $scope) {
+	function SignupCtrl(SignupService, $state, $scope, SessionService) {
 		$scope.current_user_ui = {};
 
 		$scope.register = function() {
@@ -15,6 +15,7 @@
 
 				function(response) {
 					console.log(response);
+					SessionService.setCurrentUser(response);
 					$state.go('/dashboard');
 				},
 				function(error) {
