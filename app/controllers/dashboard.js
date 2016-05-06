@@ -18,7 +18,7 @@ function createPost(req, res, next) {
 	var is,
 			tempPath,
 			extension;
-	console.log(req);
+
 	var data = _.pick(req.body, ['title']);
 	data.user = req.user._id;
 

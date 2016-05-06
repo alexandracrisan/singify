@@ -5,9 +5,10 @@
 		.module('app')
 		.controller('KaraokeCtrl', KaraokeCtrl);
 
-	KaraokeCtrl.$inject = ['$state', '$scope', 'UtilKaraokeService', 'KaraokeService'];
+	KaraokeCtrl.$inject = ['$state', '$scope', 'UtilKaraokeService', 'KaraokeService', 'UtilService'];
 
-	function KaraokeCtrl($state, $scope, UtilKaraokeService, KaraokeService) {
+	function KaraokeCtrl($state, $scope, UtilKaraokeService, KaraokeService, UtilService) {
+		this.base = UtilService.baseUrl + '/dashboard';
 		this.song = {};
 		this.songContent = {};
 		this.processedSong = {};
@@ -46,34 +47,27 @@
 			dropable.css('visibility', 'hidden');
 
 			var droppedFiles = $event.target.files || $event.dataTransfer.files;
-			console.log(droppedFiles);
 
 			var reader = new FileReader();
 
-			reader.onloadend = function(fileEvent) {
+			reader.onload = function(fileEvent) {
 				var data = fileEvent.target.result;
-			//	//reader.readAsDataURL($event.target.files[0]);
-				self.songContent = data;
-				console.log(fileEvent);
-				//self.songContent = data;
-			//	UtilKaraokeService.initAudio(data);
-			//	var dv = new jDataView(this.result);
-			//
-			//	if (dv.getString(3, dv.byteLength - 128) == 'TAG') {
-			//		var title = dv.getString(30, dv.tell());
-			//		var artist = dv.getString(30, dv.tell());
-			//		var album = dv.getString(30, dv.tell());
-			//		var year = dv.getString(4, dv.tell());
-			//	} else {
-			//		// no ID3v1 data found.
-			//	//	currentSong.innerHTML = 'Playing';
-			//	}
-			//	console.log(dv);
+
+				UtilKaraokeService.initAudio(data);
+				var dv = new jDataView(this.result);
+
+				if (dv.getString(3, dv.byteLength - 128) == 'TAG') {
+					var title = dv.getString(30, dv.tell());
+					var artist = dv.getString(30, dv.tell());
+					var album = dv.getString(30, dv.tell());
+					var year = dv.getString(4, dv.tell());
+				} else {
+					// no ID3v1 data found.
+				//	currentSong.innerHTML = 'Playing';
+				}
 			};
 
-			//var stuff = reader.readAsArrayBuffer(self.song);
-			self.song = droppedFiles[0];
-			reader.readAsBinaryString(droppedFiles[0]);
+			reader.readAsArrayBuffer(droppedFiles[0]);
 		};
 
 		this.upload = function($form) {

@@ -5,20 +5,20 @@
 		.module('app')
 		.controller('SignupCtrl', SignupCtrl);
 
-	SignupCtrl.$inject = ['SignupService', '$state'];
+	SignupCtrl.$inject = ['SignupService', '$state', '$scope'];
 
-	function SignupCtrl(SignupService, $state) {
-		this.current_user_ui = {};
-		var self = this;
+	function SignupCtrl(SignupService, $state, $scope) {
+		$scope.current_user_ui = {};
 
-		this.register = function() {
-			SignupService.createUser(self.current_user_ui).then(
+		$scope.register = function() {
+			SignupService.createUser($scope.current_user_ui).then(
+
 				function(response) {
 					console.log(response);
 					$state.go('/dashboard');
 				},
 				function(error) {
-					self.current_user_ui = {};
+					$scope.current_user_ui = {};
 					console.log(error);
 				});
 		};

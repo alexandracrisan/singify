@@ -5,20 +5,19 @@
 		.module('app')
 		.controller('SigninCtrl', SigninCtrl);
 
-	SigninCtrl.$inject = ['SigninService', '$state'];
+	SigninCtrl.$inject = ['SigninService', '$state', '$scope'];
 
-	function SigninCtrl(SigninService, $state) {
-		this.current_user_ui = {};
-		var self = this;
+	function SigninCtrl(SigninService, $state, $scope) {
+		$scope.current_user_ui = {};
 
-		this.signin = function() {
-			SigninService.loginUser(self.current_user_ui).then(
+		$scope.signin = function() {
+			SigninService.loginUser($scope.current_user_ui).then(
 				function(response) {
 					console.log(response);
 					$state.go('/dashboard');
 				},
 				function(error) {
-					self.current_user_ui = {};
+					$scope.current_user_ui = {};
 					console.log(error);
 				});
 		};

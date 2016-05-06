@@ -13,6 +13,7 @@
 
 		factory.createUser = function (userCredentials) {
 			var deffer = $q.defer();
+			console.log(userCredentials);
 			var request = UtilService.postEntity(base, userCredentials);
 
 			request
