@@ -28,7 +28,6 @@ function createPost(req, res, next) {
 		tempPath = file.path;
 		extension = 'mp3';
 		postData.filename = postData.hash + '.' + extension;
-		console.log(req.file);
 
 		if (SONG_TYPES.indexOf(file.mimetype) == -1) {
 			return res.status(415).json({
@@ -50,13 +49,11 @@ function createPost(req, res, next) {
 		}, function(err, file) {
 
 			if (err) {
-				console.log('ctrl', err);
 				return next(err);
 			}
 
 			Song.create(postData, function(err, post) {
 				if (err) {
-					console.log('song', err);
 					return next(err);
 				}
 				req.resources.post = post;

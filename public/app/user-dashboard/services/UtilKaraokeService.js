@@ -72,7 +72,7 @@
 			processor.onaudioprocess = karaoke;
 
 			// playback the sound
-			source.start(0);git
+			source.start(0);
 
 			setTimeout(disconnect, source.buffer.duration * 1000 + 1000);
 		}
