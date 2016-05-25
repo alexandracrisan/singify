@@ -20,55 +20,68 @@
 		</div>
 	</div>
 </div>
+<!-- fixed navigation bar -->
+<div id="wrapper" class="active">
+	<!-- Sidebar -->
+	<div id="sidebar-wrapper">
+		<ul id="sidebar_menu" class="sidebar-nav">
+			<li class="sidebar-brand"><a id="menu-toggle" href="#" ng-click="karaokeCtrl.toggleMenu($event)">Songs<span id="main_icon" class="glyphicon glyphicon-align-justify"></span></a></li>
+		</ul>
+		<ul class="sidebar-nav" id="sidebar">
 
-<form class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 form-file"
-		name="uploadform"
-		method="post"
-		enctype="multipart/form-data"
-		action="{{ karaokeCtrl.base }}">
-	<div class="form-group">
-		<label>Title of your song</label>
-		<input type="text"
-			class="form-control"
-			placeholder="title"
-			name="title"
-		  autocomplete="off">
+		</ul>
 	</div>
 
-	<div class="form-group">
-		<div id="upload-song">
-			<!--<div class="pull-left">-->
-				<!--<span class="glyphicon glyphicon-camera"></span>-->
-				<!--<span>Add file</span>-->
-			<!--</div>-->
-			<input
-				class="upload-file upload-song-input"
-				type="file"
-				name="file"
-				accept="audio/*"
-				ng-model="karaokeCtrl.song"
-				onchange="angular.element(this).scope().fileSelectHandler(event)"
-				/>
+	<!-- Page content -->
+	<div id="page-content-wrapper">
+		<!-- Keep all page content within the page-content inset div! -->
+		<div class="page-content inset">
+			<div class="row">
+				<form class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 form-file"
+							name="uploadform"
+							method="post"
+							enctype="multipart/form-data"
+							action="{{ karaokeCtrl.base }}">
+					<div class="form-group">
+						<label>Title of your song</label>
+						<input type="text"
+									 class="form-control"
+									 placeholder="title"
+									 name="title"
+									 autocomplete="off">
+					</div>
+					<div class="form-group">
+						<div id="upload-song" >
+							<div class="pull-left pointer">
+								<span class="glyphicon glyphicon-camera"></span>
+								<span>Add file</span>
+							</div>
 
-			<div class="droppable" id="droppable">
-				<div class="dropppable-text">
-					<p>Drag files here</p>
-				</div>
-				<!--<input-->
-					<!--class="upload-file upload-song-input"-->
-					<!--type="file"-->
-					<!--name="file"-->
-					<!--ng-file-select="onFileSelect($files)"-->
-					<!--ng-click="karaokeCtrl.cli($event)"-->
-					<!--/>-->
+							<div class="droppable" id="droppable">
+								<div class="dropppable-text">
+									<p>Drag files here</p>
+								</div>
+								<input
+									class="upload-file upload-song-input"
+									type="file"
+									name="file"
+									accept="audio/*"
+									ng-model="karaokeCtrl.song"
+									onchange="angular.element(this).scope().fileSelectHandler(event)"
+									/>
+							</div>
+						</div>
+						<div class="pull-right">
+							<button
+								class="btn btn-primary"
+								type="submit">
+								Post
+							</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
-		<div class="pull-right">
-			<button
-				class="btn btn-primary"
-				type="submit">
-				Post
-			</button>
-		</div>
 	</div>
-</form>
+</div>
+

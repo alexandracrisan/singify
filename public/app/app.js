@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('app', ['ui.router'])
-		.config(function ($stateProvider, $urlRouterProvider) {
+		.config(function ($stateProvider, $urlRouterProvider,  $locationProvider) {
 			$urlRouterProvider.otherwise('/');
 
 			$stateProvider
@@ -17,6 +17,8 @@
 					},
 					templateUrl: 'app/user-dashboard/partials/user-dashboard.html',
 					controller: 'KaraokeCtrl as karaokeCtrl'
-				})
+				});
+
+			$locationProvider.html5Mode(true);
 		});
 })();

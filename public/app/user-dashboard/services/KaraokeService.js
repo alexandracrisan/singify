@@ -9,10 +9,28 @@
 
 	function KaraokeService($q, UtilService, $http) {
 		var factory = {},
-			base = UtilService.baseUrl + '/dashboard';
+			deffer,
+			base = UtilService.baseUrl + '/dashboard',
+			songsPath = UtilService.baseUrl + '/songs';
 
 		factory.uploadSong = function (song) {
-			var deffer = $q.defer();
+			deffer = $q.defer();
+
+			return deffer.promise;
+		};
+
+		factory.getUserSongs = function() {
+			deffer = $q.defer();
+			var request = UtilService.getEntity(songsPath);
+
+			request
+				.success(function (data, status, headers, config) {
+					deffer.resolve(data);
+				}).
+				error(function (data, status, headers, config) {
+					deffer.reject(status);
+					console.log(status);
+				});
 
 			return deffer.promise;
 		};

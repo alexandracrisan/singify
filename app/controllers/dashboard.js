@@ -11,7 +11,9 @@ var FileStorage = require('../services/filestorage')({
 });
 
 module.exports.create = createPost;
+module.exports.getAllSongs = getAllSongs;
 module.exports.jsonPost = jsonPost;
+module.exports.jsonSongs = jsonSongs;
 
 function createPost(req, res, next) {
 	var is,
@@ -41,7 +43,6 @@ function createPost(req, res, next) {
 			});
 		}
 
-
 		FileStorage.store({
 			filepath: tempPath,
 			filename: postData.filename,
@@ -63,6 +64,34 @@ function createPost(req, res, next) {
 	}
 }
 
+function getAllSongs(req, res, next) {
+	var query = {};
+	query.sort = { createdAt: -1 };
+	query.find = {user: req.user._id};
+
+	Song
+		.find(query.find)
+		.sort(query.sort)
+		.populate('user')
+		.exec(function(err, songs) {
+			if (err) {
+				return next(err);
+			}
+
+			req.resources.songs = songs;
+			next();
+		});
+}
+
 function jsonPost(req, res, next) {
 	res.json(req.resources.post);
+}
+
+function jsonSongs(req, res, next) {
+	if(!req.resources.songs) {
+		return res.status(400).json({
+			message: 'No songs available'
+		});
+	}
+	res.json(req.resources.songs);
 }

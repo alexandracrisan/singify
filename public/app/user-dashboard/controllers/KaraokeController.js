@@ -13,6 +13,7 @@
 
 		var fileDrag = document.getElementById('upload-song');
 		var dropable = $('.droppable');
+		var dr = document.getElementById('droppable');
 		var lastenter;
 		var xhr = new XMLHttpRequest();
 
@@ -20,7 +21,7 @@
 			// file drop
 			fileDrag.addEventListener('dragenter', fileDragEnter, false);
 			fileDrag.addEventListener('dragleave', fileDragLeave, false);
-			fileDrag.addEventListener('drop', $scope.fileSelectHandler, false);
+			dr.addEventListener('drop', $scope.fileSelectHandler, false);
 		}
 
 		function fileDragEnter(e) {
@@ -39,9 +40,9 @@
 
 		$scope.fileSelectHandler = function($event) {
 			console.log("Changed");
-
-			$event.stopPropagation();
 			$event.preventDefault();
+			$event.stopPropagation();
+
 			dropable.css('visibility', 'hidden');
 
 			var droppedFiles = $event.target.files || $event.dataTransfer.files;
@@ -66,6 +67,57 @@
 
 			reader.readAsArrayBuffer(droppedFiles[0]);
 		};
+
+		this.toggleMenu = function($event) {
+			$event.preventDefault();
+			var sidebar = $('#sidebar');
+			var wrapper = sidebar.parents('#wrapper');
+			wrapper.toggleClass("active");
+
+			if(wrapper.hasClass('active')) {
+				sidebar.mCustomScrollbar({
+					theme: 'rounded-dots',
+					scrollInertia: 1400
+				});
+			}
+			else {
+				sidebar.mCustomScrollbar('destroy');
+			}
+		};
+
+		$scope.$on('$viewContentLoaded', function(){
+			KaraokeService.getUserSongs().then(
+				function(response) {
+					var sidebar = $('#sidebar');
+					var songElem = '';
+					var wrapper = sidebar.parents('#wrapper');
+
+					response.forEach(function(val, index) {
+						songElem += '<li><a>'+ val.title +'<span class="sub_icon glyphicon glyphicon-play"></span></a></li>'
+					});
+
+					sidebar.append(songElem);
+
+					sidebar.mCustomScrollbar({
+						theme: 'rounded-dots',
+						scrollInertia: 1400
+					});
+				},
+				function(error) {
+					console.log(error);
+				}
+			)
+		});
+
+		//trigger click on input type file
+		$('#upload-song')
+		.on('click', function(e) {
+			$('.upload-song-input').trigger('click');
+		})
+		.on('click', '.upload-song-input', function(e) {
+				e.stopPropagation();
+		})
+
 	}
 })();
 

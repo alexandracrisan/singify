@@ -17,4 +17,11 @@ router.post(
 	dashboardCtrl.jsonPost
 );
 
+router.get(
+	'/songs',
+	auth.ensured,
+	dashboardCtrl.getAllSongs,
+	dashboardCtrl.jsonSongs
+);
+
 module.exports = router;
