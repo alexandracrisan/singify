@@ -42,6 +42,7 @@ function createPost(req, res, next) {
 			});
 		}
 
+
 		FileStorage.store({
 			filepath: tempPath,
 			filename: postData.filename,

@@ -50,7 +50,6 @@
 
 			reader.onload = function(fileEvent) {
 				var data = fileEvent.target.result;
-
 				UtilKaraokeService.initAudio(data);
 				var dv = new jDataView(this.result);
 

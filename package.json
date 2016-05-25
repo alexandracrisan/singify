@@ -18,11 +18,13 @@
   },
   "homepage": "https://github.com/alexandracrisan/singify#readme",
   "dependencies": {
+    "audio-context": "^0.1.0",
     "body-parser": "^1.15.0",
     "connect-mongo": "^1.1.0",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "express-validator": "^2.20.3",
+    "filereader": "^0.10.3",
     "google-closure-compiler": "^20160315.2.0",
     "lodash": "^4.11.1",
     "method-override": "^2.3.5",

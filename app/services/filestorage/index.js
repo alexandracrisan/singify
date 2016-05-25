@@ -6,7 +6,7 @@ var DiskStorage = require('./disk')();
 function FileStorage(opts) {
 	/**
 	 *  Determin storage instance type
-	 *  we support only `disk` storage for now
+	 * only `disk` storagez
 	 */
 	if (opts.type === 'disk') {
 		this.storage = DiskStorage;
