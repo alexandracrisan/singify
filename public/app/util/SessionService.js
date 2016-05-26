@@ -17,8 +17,8 @@
 			return JSON.parse(localStorage.getItem('currentUser'));
 		};
 
-		this.removeCurrentUser = function (key) {
-			localStorage.removeItem(key);
+		this.removeCurrentUser = function () {
+			localStorage.removeItem('currentUser');
 		};
 
 		return this;

@@ -25,6 +25,12 @@ module.exports.signin = function (req, res, next) {
 	})(req, res, next);
 };
 
+
+module.exports.signout = function(req, res, next) {
+	req.logout();
+	res.redirect('/');
+};
+
 function handleResponse(status, data, req, res) {
 	res.format({
 		html: function () {

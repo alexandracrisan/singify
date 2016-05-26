@@ -85,6 +85,19 @@
 			}
 		};
 
+		this.logout = function() {
+			SessionService.removeCurrentUser();
+			KaraokeService.logout().then(
+				function(response) {
+
+					window.location.href =  UtilService.baseUrl + '/';
+				},
+				function(error) {
+					console.log(error);
+				}
+			)
+		};
+
 		$scope.$on('$viewContentLoaded', function(){
 			KaraokeService.getUserSongs().then(
 				function(response) {
@@ -92,9 +105,14 @@
 					var songElem = '';
 					var wrapper = sidebar.parents('#wrapper');
 
-					response.forEach(function(val, index) {
-						songElem += '<li><a>'+ val.title +'<span class="sub_icon glyphicon glyphicon-play"></span></a></li>'
-					});
+					if(!response.length) {
+						songElem += '<li><a>No songs available</a></li>'
+					}
+					else {
+						response.forEach(function(val, index) {
+							songElem += '<li><a>'+ val.title +'<span class="sub_icon glyphicon glyphicon-play"></span></a></li>'
+						});
+					}
 
 					sidebar.append(songElem);
 

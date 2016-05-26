@@ -10,6 +10,6 @@ var config = require('../../config/');
 if (config.accessRoutes) {
 	router.post('/signin', authCtrl.signin);
 }
-//router.get('/signout', authCtrl.signout);
+router.get('/signout', authCtrl.signout);
 
 module.exports = router;

@@ -11,7 +11,8 @@
 		var factory = {},
 			deffer,
 			base = UtilService.baseUrl + '/dashboard',
-			songsPath = UtilService.baseUrl + '/songs';
+			songsPath = UtilService.baseUrl + '/songs',
+			logoutPath = UtilService.baseUrl + '/signout';
 
 		factory.uploadSong = function (song) {
 			deffer = $q.defer();
@@ -22,6 +23,22 @@
 		factory.getUserSongs = function() {
 			deffer = $q.defer();
 			var request = UtilService.getEntity(songsPath);
+
+			request
+				.success(function (data, status, headers, config) {
+					deffer.resolve(data);
+				}).
+				error(function (data, status, headers, config) {
+					deffer.reject(status);
+					console.log(status);
+				});
+
+			return deffer.promise;
+		};
+
+		factory.logout = function() {
+			deffer = $q.defer();
+			var request = UtilService.getEntity(logoutPath);
 
 			request
 				.success(function (data, status, headers, config) {
