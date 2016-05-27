@@ -77,7 +77,7 @@
 
 			window.source = source;
 
-			setTimeout(disconnect, source.buffer.duration * 1000 + 1000);
+		//	setTimeout(disconnect, source.buffer.duration * 1000 + 1000);
 		}
 
 		function disconnect() {

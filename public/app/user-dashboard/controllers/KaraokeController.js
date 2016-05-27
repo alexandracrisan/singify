@@ -151,17 +151,17 @@
 		function trackStarter(elem) {
 			var dataFileName = $(elem).attr('data-filename');
 			var urlFileName = UtilService.baseUrl+ '/files/' + dataFileName;
+			var $prevItem = $(elem).parent().prev().find('.song-item');
+			var $nextItem = $(elem).parent().next().find('.song-item');
+
+			if(!$prevItem.length) {
+				$backBtn.prop( "disabled", true );
+			}
+			if(!$nextItem.length) {
+				$forwardBtn.prop( "disabled", true );
+			}
+
 			lastPlaylistItemNode = $(elem);
-			var $prevItem = lastPlaylistItemNode.parent().prev().find('.song-item');
-			var $nextItem = lastPlaylistItemNode.parent().next().find('.song-item');
-
-			//if(!$prevItem.length) {
-			//	$backBtn.prop( "disabled", true );
-			//}
-			//if(!$nextItem.length) {
-			//	$forwardBtn.prop( "disabled", true );
-			//}
-
 
 			KaraokeService.getFile(urlFileName).then(
 				function(response) {
