@@ -45,18 +45,18 @@
 							method="post"
 							enctype="multipart/form-data"
 							action="{{ karaokeCtrl.base }}">
-					<div class="form-group">
+					<div class="form-group primary-color">
 						<label>Title of your song</label>
 						<input type="text"
 									 class="form-control"
-									 placeholder="title"
+									 placeholder="eg: Slow Down"
 									 name="title"
 									 autocomplete="off">
 					</div>
 					<div class="form-group">
 						<div id="upload-song" >
-							<div class="pull-left pointer">
-								<span class="glyphicon glyphicon-camera"></span>
+							<div class="pull-left pointer primary-color">
+								<span class="glyphicon glyphicon-camera base-color"></span>
 								<span>Add file</span>
 							</div>
 
@@ -76,7 +76,7 @@
 						</div>
 						<div class="pull-right">
 							<button
-								class="btn btn-primary"
+								class="btn post-btn"
 								type="submit">
 								Post
 							</button>

@@ -292,3 +292,26 @@
 	padding-left: 168px;
 	visibility: hidden;
 }
+
+.post-btn {
+	background-color: #00bd9b;
+	box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.075);
+	color: #fff;
+}
+
+.btn.post-btn:hover {
+	/*color: #999;*/
+	opacity: 0.8;
+}
+
+.tracks-bar button span {
+	color: #00bd9b;
+}
+
+.primary-color {
+	color: #777;
+}
+
+.base-color {
+	color: #00bd9b;
+}

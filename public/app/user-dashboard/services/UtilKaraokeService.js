@@ -17,7 +17,7 @@
 			mix2;
 		var context = new (window.AudioContext || window.webkitAudioContext)();
 
-		factory.initAudio = function (data, processMode) {
+		factory.initAudio = function (data, processMode, duration) {
 			if (source) source.stop(0);
 
 			source = context.createBufferSource();
@@ -25,17 +25,17 @@
 			if (context.decodeAudioData) {
 				context.decodeAudioData(data, function (buffer) {
 					source.buffer = buffer;
-					createAudio(processMode);
+					createAudio(processMode, duration);
 				}, function (e) {
 					console.error(e);
 				});
 			} else {
 				source.buffer = context.createBuffer(data, false);
-				createAudio();
+				createAudio(processMode, duration);
 			}
 		};
 
-		function createAudio(processMode) {
+		function createAudio(processMode, duration) {
 			// create low-pass filter
 			filterLowPass = context.createBiquadFilter();
 			source.connect(filterLowPass);
@@ -73,11 +73,12 @@
 
 			// playback the sound
 			processMode == 'trackList' ? renderTracksBar() : '';
-			source.start(0);
+			duration ? source.start(0, duration) : source.start(0);
 
 			window.source = source;
+			console.log(source.buffer.duration);
 
-		//	setTimeout(disconnect, source.buffer.duration * 1000 + 1000);
+			setTimeout(disconnect, source.buffer.duration * 1000 + 1000);
 		}
 
 		function disconnect() {

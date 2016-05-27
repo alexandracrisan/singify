@@ -141,12 +141,15 @@
 		var $tracksBar = $('.tracks-bar');
 		var $backBtn = $('.backward-btn');
 		var $forwardBtn = $('.forward-btn');
+		var $pauseBtn = $('.pause-btn');
 
 		$('#sidebar').on('click', '.song-item', function(e) {
 			trackStarter(this);
 		});
 		$tracksBar.on('click', '.backward-btn', playPrevTrack);
 		$tracksBar.on('click', '.forward-btn', playNextTrack);
+		$tracksBar.on('click', '.pause-btn', pauseTrack);
+		$tracksBar.on('click', '.play-btn', playTrack);
 
 		function trackStarter(elem) {
 			var dataFileName = $(elem).attr('data-filename');
@@ -165,7 +168,7 @@
 
 			KaraokeService.getFile(urlFileName).then(
 				function(response) {
-
+					window.original = response;
 					UtilKaraokeService.initAudio(response, 'trackList');
 				}
 			)
@@ -183,14 +186,17 @@
 			lastPlaylistItemNode = $nextItem;
 		}
 
-		//$('#playerwhatverala de jos').on('click', '#pauza' , function(e) {
-		//		source.stop()
-		//			s
-		//	}
+		function pauseTrack(e) {
+			window.source.stop(0);
+			window.source.disconnect(0);
+			$(this).replaceWith('<button class="play-btn"><span class="glyphicon glyphicon-play"></span></button>');
+		}
 
-		//$('#playerwhatverala de jos').on('click', '#playagain' , function(e) {
-		//	 UtilKaraokeService.initAudio(response_ul salvat undeva global, din player=true, secumde = unde a ramas);
-		//	}
+		function playTrack(e) {
+			var duration = 20;
+			UtilKaraokeService.initAudio(window.original, 'trackList', duration);
+			$(this).replaceWith('<button class="pause-btn"><span class="glyphicon glyphicon-pause"></span></button>');
+		}
 	}
 })();
 
