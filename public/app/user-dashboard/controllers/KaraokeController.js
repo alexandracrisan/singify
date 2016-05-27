@@ -15,6 +15,7 @@
 		var dropable = $('.droppable');
 		var dr = document.getElementById('droppable');
 		var lastenter;
+		var lastPlaylistItemNode;
 		var xhr = new XMLHttpRequest();
 
 		if (xhr.upload) {
@@ -36,8 +37,6 @@
 			return false;
 		}
 
-		var self = this;
-
 		$scope.fileSelectHandler = function($event) {
 			console.log("Changed");
 			$event.preventDefault();
@@ -51,7 +50,7 @@
 
 			reader.onload = function(fileEvent) {
 				var data = fileEvent.target.result;
-				UtilKaraokeService.initAudio(data);
+				UtilKaraokeService.initAudio(data, 'fileUpload');
 				var dv = new jDataView(this.result);
 
 				if (dv.getString(3, dv.byteLength - 128) == 'TAG') {
@@ -139,16 +138,59 @@
 				e.stopPropagation();
 		});
 
+		var $tracksBar = $('.tracks-bar');
+		var $backBtn = $('.backward-btn');
+		var $forwardBtn = $('.forward-btn');
 
 		$('#sidebar').on('click', '.song-item', function(e) {
-			var dataFileName = $(this).attr('data-filename');
-			var urlFileName = UtilService.baseUrl+ '/files/' + dataFileName;
-
-			var audio = '<audio controls><source src="' + urlFileName +'"></audio>';
-			$('.audio').append(audio);
-
+			trackStarter(this);
 		});
+		$tracksBar.on('click', '.backward-btn', playPrevTrack);
+		$tracksBar.on('click', '.forward-btn', playNextTrack);
 
+		function trackStarter(elem) {
+			var dataFileName = $(elem).attr('data-filename');
+			var urlFileName = UtilService.baseUrl+ '/files/' + dataFileName;
+			lastPlaylistItemNode = $(elem);
+			var $prevItem = lastPlaylistItemNode.parent().prev().find('.song-item');
+			var $nextItem = lastPlaylistItemNode.parent().next().find('.song-item');
+
+			//if(!$prevItem.length) {
+			//	$backBtn.prop( "disabled", true );
+			//}
+			//if(!$nextItem.length) {
+			//	$forwardBtn.prop( "disabled", true );
+			//}
+
+
+			KaraokeService.getFile(urlFileName).then(
+				function(response) {
+
+					UtilKaraokeService.initAudio(response, 'trackList');
+				}
+			)
+		}
+
+		function playPrevTrack(e) {
+			var $prevItem = lastPlaylistItemNode.parent().prev().find('.song-item');
+			trackStarter($prevItem);
+			lastPlaylistItemNode = $prevItem;
+		}
+
+		function playNextTrack(e) {
+			var $nextItem = lastPlaylistItemNode.parent().next().find('.song-item');
+			trackStarter($nextItem);
+			lastPlaylistItemNode = $nextItem;
+		}
+
+		//$('#playerwhatverala de jos').on('click', '#pauza' , function(e) {
+		//		source.stop()
+		//			s
+		//	}
+
+		//$('#playerwhatverala de jos').on('click', '#playagain' , function(e) {
+		//	 UtilKaraokeService.initAudio(response_ul salvat undeva global, din player=true, secumde = unde a ramas);
+		//	}
 	}
 })();
 

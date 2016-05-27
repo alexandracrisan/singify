@@ -96,13 +96,13 @@
 }
 
 /*sidemenu*/
-.row {
+.page-content .row {
 	margin-left: 0;
 	margin-right: 0;
 }
 
 #wrapper {
-	padding-left: 70px;
+	padding-left: 168px;
 	transition: all .4s ease 0s;
 	height: 100%
 }
@@ -252,7 +252,7 @@
 
 
 .droppable {
-	background: mediumvioletred;
+	background: #00bd9b;
 	color: #fff;
 	opacity: 0.85;
 	text-align: center;
@@ -272,15 +272,23 @@
 
 
 .droppable.dragover {
-	background: mediumvioletred;
+	background: #00bd9b;
 }
 
 [draggable=true] {
 	-khtml-user-drag: element;
 }
 
-.audio {
+.tracks-bar {
 	position: absolute;
 	bottom: 0;
 	right: 0;
+	min-height: 50px;
+	/*background-color: #222;*/
+	/*background-color: #f8f8f8;*/
+	/*border-color: #e7e7e7;*/
+	/*border: 1px solid;*/
+	width: 100%;
+	padding-left: 168px;
+	visibility: hidden;
 }

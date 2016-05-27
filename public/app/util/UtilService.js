@@ -39,6 +39,14 @@
 			})
 		};
 
+		this.getABEntity = function (url) {
+			return $http({
+				method: 'GET',
+				url: url,
+				responseType: 'arraybuffer'
+			})
+		};
+
 		return this;
 	}
 })();

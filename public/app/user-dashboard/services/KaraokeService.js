@@ -52,6 +52,22 @@
 			return deffer.promise;
 		};
 
+		factory.getFile = function(fileUrl) {
+			deffer = $q.defer();
+			var request = UtilService.getABEntity(fileUrl);
+
+			request
+				.success(function (data, status, headers, config) {
+					deffer.resolve(data);
+				}).
+				error(function (data, status, headers, config) {
+					deffer.reject(status);
+					console.log(status);
+				});
+
+			return deffer.promise;
+		};
+
 		return factory;
 	}
 })();
