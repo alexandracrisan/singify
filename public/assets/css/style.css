@@ -279,3 +279,8 @@
 	-khtml-user-drag: element;
 }
 
+.audio {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}

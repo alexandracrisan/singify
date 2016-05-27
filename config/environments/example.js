@@ -21,10 +21,9 @@ module.exports = {
 		storagetype: 'disk',
 		readertype: 'disk'
 	},
-
-	//assets: {
-	//    url: 'http://localhost:3000/files'        // or http://*.cloudfront.net
-	//},
+	assets: {
+	    url: 'http://localhost:3000/files'
+	},
 	//facebook: {
 	//    appID: 'facebook_app_id',
 	//    appSecret: 'facebook_app_secret',

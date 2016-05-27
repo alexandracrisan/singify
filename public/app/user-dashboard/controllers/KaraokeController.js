@@ -79,9 +79,11 @@
 					theme: 'rounded-dots',
 					scrollInertia: 1400
 				});
+				sidebar.find('.available').text('No songs available');
 			}
 			else {
 				sidebar.mCustomScrollbar('destroy');
+				sidebar.find('.available').text('');
 			}
 		};
 
@@ -106,11 +108,12 @@
 					var wrapper = sidebar.parents('#wrapper');
 
 					if(!response.length) {
-						songElem += '<li><a>No songs available</a></li>'
+						songElem += '<li><a class="available">No songs available</a></li>'
 					}
 					else {
 						response.forEach(function(val, index) {
-							songElem += '<li><a>'+ val.title +'<span class="sub_icon glyphicon glyphicon-play"></span></a></li>'
+							songElem += '<li><a class="song-item" data-filename="' + val.filename + '">'+ val.title +
+								'<span class="sub_icon glyphicon glyphicon-play"></span></a></li>';
 						});
 					}
 
@@ -134,7 +137,17 @@
 		})
 		.on('click', '.upload-song-input', function(e) {
 				e.stopPropagation();
-		})
+		});
+
+
+		$('#sidebar').on('click', '.song-item', function(e) {
+			var dataFileName = $(this).attr('data-filename');
+			var urlFileName = UtilService.baseUrl+ '/files/' + dataFileName;
+
+			var audio = '<audio controls><source src="' + urlFileName +'"></audio>';
+			$('.audio').append(audio);
+
+		});
 
 	}
 })();

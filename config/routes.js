@@ -11,6 +11,10 @@ module.exports.init = function (app) {
 	app.use('/', require(routesPath + '/authentication'));
 	app.use('/', require(routesPath + '/dashboard'));
 
+	if (config.filestore.readertype === 'disk') {
+		app.use('/', require(routesPath + '/files'));
+	}
+
 	app.get('*', function (req, res) {
 		res.sendFile(app.get('root') + '/public/index.html');
 	});
