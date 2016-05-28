@@ -428,3 +428,21 @@
 .container .nav.navbar-nav.navbar-right.home-page {
 	margin-right: 5%;
 }
+
+.description {
+	position: absolute;
+	left: 15%;
+	top: 35%;
+	bottom: 35%;
+	right: 15%;
+	background: #000;
+	opacity: 0.4;
+	filter: alpha(opacity=40);
+	z-index: 10000;
+	border-radius: 2%;
+}
+
+.description h2 {
+	color: white;
+	margin: 9% 50px;
+}
