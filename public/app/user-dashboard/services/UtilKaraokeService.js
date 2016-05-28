@@ -92,6 +92,8 @@
 			} else {
 				interval = () => {};
 			}
+			//remove loader
+			$('#overlay').remove();
 			//position ? source.start(0, position) : source.start(0);
 			source.start(0, position);
 
@@ -124,12 +126,15 @@
  		var slider;
 		function renderTracksBar() {
 			var $tracksBar = $('.tracks-bar');
+			var $imageName = $('.song-name');
+			$imageName.text('');
 			trackLength = source.buffer.duration;
 			$tracksBar.css('visibility', 'visible');
 			slider = $tracksBar.find('input#slider');
 			slider.slider({
 				max: trackLength,
 				value: position,
+				tooltip_position: 'bottom',
 				formatter: function(value) {
 					var mins = Math.floor(value / 60);
 					if (mins < 10) {
@@ -142,9 +147,12 @@
 					return '' + mins + 'm:' + secs + 's';
 				},
 			}).off('slideStop').on('slideStop', (newPosition) => {
+				factory.loading();
 				position = newPosition.value;
 				if( isPlaying) {
 					factory.initAudio(window.original, 'trackList', false);
+					$('#pause-play').replaceWith('<button type="button" id="pause-play" class="btn btn-default btn-circle btn-lg pause-btn" title="Pause">' +
+						'<span class="glyphicon glyphicon-pause"></span></button>');
 				}
 
 				return;
@@ -159,7 +167,13 @@
 			return interval;
 		}
 
-
+		factory.loading = function() {
+			// add the overlay with loading image to the page
+			var over = '<div id="overlay">' +
+				'<img id="loading" src="http://i201.photobucket.com/albums/aa236/Mottie1/testsite/icons/loading3.gif">' +
+				'</div>';
+			$(over).appendTo('body');
+		};
 
 		return factory;
 	}

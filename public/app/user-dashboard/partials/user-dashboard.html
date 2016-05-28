@@ -19,7 +19,7 @@
 				<div class="navbar navbar-default navbar-fixed-top" role="navigation">
 					<div class="container">
 						<div class="collapse navbar-collapse">
-							<ul class="nav navbar-nav navbar-right">
+							<ul class="nav navbar-nav navbar-right pointer">
 								<li class="bottom text-center dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 										<div ng-if="karaokeCtrl.loggedUser">
@@ -45,21 +45,13 @@
 							method="post"
 							enctype="multipart/form-data"
 							action="{{ karaokeCtrl.base }}">
-					<div class="form-group primary-color">
-						<label>Title of your song</label>
-						<input type="text"
-									 class="form-control"
-									 placeholder="eg: Slow Down"
-									 name="title"
-									 autocomplete="off">
-					</div>
-					<div class="form-group">
+
+					<div class="form-group select-file-area">
 						<div id="upload-song" >
 							<div class="pull-left pointer primary-color">
 								<span class="glyphicon glyphicon-camera base-color"></span>
-								<span>Add file</span>
+								<span>Upload file</span>
 							</div>
-
 							<div class="droppable" id="droppable">
 								<div class="dropppable-text">
 									<p>Drag files here</p>
@@ -74,25 +66,37 @@
 									/>
 							</div>
 						</div>
-						<div class="pull-right">
-							<button
-								class="btn post-btn"
-								type="submit">
-								Post
-							</button>
-						</div>
 					</div>
+					<div class="form-group">
+						<h4 class="primary-color">Would you like to exercise your vocals later on this song? <span class="base-color"> Save it</span></h4>
+
+					</div>
+					<div class="form-group primary-color">
+						<label>Title of your song</label>
+						<input type="text"
+									 class="form-control"
+									 placeholder="eg: Slow Down"
+									 name="title"
+									 autocomplete="off">
+					</div>
+					<div class="pull-right">
+						<button
+							class="btn post-btn"
+							type="submit">
+							Save
+						</button>
+					</div>
+					<span class="song-name"></span>
 				</form>
 			</div>
 		</div>
 		<div class="tracks-bar">
 			<button type="button" class="btn btn-default btn-circle btn-lg backward-btn" title="Previous song"><span class="glyphicon glyphicon-step-backward"></span></button>
-			<button type="button" class="btn btn-default btn-circle btn-lg pause-btn" title="Pause"><span class="glyphicon glyphicon-pause"></span></button>
+			<button type="button" id="pause-play" class="btn btn-default btn-circle btn-lg pause-btn" title="Pause"><span class="glyphicon glyphicon-pause"></span></button>
 			<button type="button" class="btn btn-default btn-circle btn-lg forward-btn" title="Next song"><span class="glyphicon glyphicon-step-forward"></span></button>
 			<div class="slide-container">
 				<input id="slider" type="text" data-slider-min="0" data-slider-step="1" data-slider-value="0"/>
 			</div>
-
 		</div>
 	</div>
 </div>

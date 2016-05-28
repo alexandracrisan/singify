@@ -38,7 +38,6 @@
 		}
 
 		$scope.fileSelectHandler = function($event) {
-			console.log("Changed");
 			$event.preventDefault();
 			$event.stopPropagation();
 
@@ -47,23 +46,23 @@
 			var droppedFiles = $event.target.files || $event.dataTransfer.files;
 
 			var reader = new FileReader();
+			var files;
+			var $imageName = $('.song-name');
 
 			reader.onload = function(fileEvent) {
 				var data = fileEvent.target.result;
+				UtilKaraokeService.loading();
 				UtilKaraokeService.initAudio(data, 'fileUpload', true);
-				var dv = new jDataView(this.result);
 
-				if (dv.getString(3, dv.byteLength - 128) == 'TAG') {
-					var title = dv.getString(30, dv.tell());
-					var artist = dv.getString(30, dv.tell());
-					var album = dv.getString(30, dv.tell());
-					var year = dv.getString(4, dv.tell());
-				} else {
-					// no ID3v1 data found.
-				//	currentSong.innerHTML = 'Playing';
-				}
 			};
 
+			if ($event.target) {
+				if($event.target.files[0]) {
+					files = $event.target.files[0].name;
+				}
+			}
+
+			$imageName.text(files);
 			reader.readAsArrayBuffer(droppedFiles[0]);
 		};
 
@@ -111,7 +110,7 @@
 					}
 					else {
 						response.forEach(function(val, index) {
-							songElem += '<li><a class="song-item" data-filename="' + val.filename + '">'+ val.title +
+							songElem += '<li><a class="song-item pointer" data-filename="' + val.filename + '">'+ val.title +
 								'<span class="sub_icon glyphicon glyphicon-play"></span></a></li>';
 						});
 					}
@@ -174,6 +173,7 @@
 
 			KaraokeService.getFile(urlFileName).then(
 				function(response) {
+					UtilKaraokeService.loading();
 					window.original = response;
 					UtilKaraokeService.initAudio(response, 'trackList', true);
 				}
@@ -197,15 +197,17 @@
 			window.source.disconnect(0);
 			clearInterval(window.source.interval);
 			window.source = null;
-			$(this).replaceWith('<button type="button" title="Play/Resume" class="btn btn-default btn-circle btn-lg play-btn">' +
+			$(this).replaceWith('<button type="button" id="pause-play" title="Play/Resume" class="btn btn-default btn-circle btn-lg play-btn">' +
 				'<span class="glyphicon glyphicon-play"></span></button>');
 		}
 
 		function playTrack(e) {
+			UtilKaraokeService.loading();
 			UtilKaraokeService.initAudio(window.original, 'trackList', false);
-			$(this).replaceWith('<button type="button" title="Pause" class="btn btn-default btn-circle btn-lg pause-btn">' +
+			$(this).replaceWith('<button type="button" id="pause-play" title="Pause" class="btn btn-default btn-circle btn-lg pause-btn">' +
 				'<span class="glyphicon glyphicon-pause"></span></button>');
 		}
+
 	}
 })();
 
