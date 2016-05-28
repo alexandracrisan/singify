@@ -76,7 +76,6 @@
 			duration ? source.start(0, duration) : source.start(0);
 
 			window.source = source;
-			console.log(source.buffer.duration);
 
 			setTimeout(disconnect, source.buffer.duration * 1000 + 1000);
 		}
