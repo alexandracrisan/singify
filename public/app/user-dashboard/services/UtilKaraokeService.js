@@ -18,6 +18,7 @@
 			position,
 			trackLength,
 			secondLength;
+		var isPlaying = false;
 		var context = new (window.AudioContext || window.webkitAudioContext)();
 
 		factory.initAudio = function (data, processMode, resetTimer) {
@@ -25,6 +26,9 @@
 				clearInterval(source.interval);
 				disconnect();
 				source = null;
+				isPlaying = true;
+			} else {
+				isPlaying = false;
 			}
 			if (resetTimer) {
 				position = 0;
@@ -137,10 +141,12 @@
 					}
 					return '' + mins + 'm:' + secs + 's';
 				},
-			}).on('slideStop', (newPosition) => {
-				console.log(newPosition);
+			}).off('slideStop').on('slideStop', (newPosition) => {
 				position = newPosition.value;
-				//factory.initAudio(window.original, 'trackList', false);
+				if( isPlaying) {
+					factory.initAudio(window.original, 'trackList', false);
+				}
+
 				return;
 			});
 			var interval = setInterval(() => {
