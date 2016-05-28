@@ -86,13 +86,13 @@
 			</div>
 		</div>
 		<div class="tracks-bar">
-			<button class="backward-btn"><span class="glyphicon glyphicon-step-backward"></span></button>
-			<button class="pause-btn"><span class="glyphicon glyphicon-pause"></span></button>
-			<button class="forward-btn"><span class="glyphicon glyphicon-step-forward"></span></button>
-			<div class="progress">
-				<div data-attr="seekableTrack" class="seekableTrack"></div>
-				<div class="updateProgress"></div>
+			<button type="button" class="btn btn-default btn-circle btn-lg backward-btn" title="Previous song"><span class="glyphicon glyphicon-step-backward"></span></button>
+			<button type="button" class="btn btn-default btn-circle btn-lg pause-btn" title="Pause"><span class="glyphicon glyphicon-pause"></span></button>
+			<button type="button" class="btn btn-default btn-circle btn-lg forward-btn" title="Next song"><span class="glyphicon glyphicon-step-forward"></span></button>
+			<div class="slide-container">
+				<input id="slider" type="text" data-slider-min="0" data-slider-step="1" data-slider-value="0"/>
 			</div>
+
 		</div>
 	</div>
 </div>

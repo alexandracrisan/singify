@@ -14,28 +14,37 @@
 			filterLowPass,
 			filterHighPass,
 			mix,
-			mix2;
+			mix2,
+			position,
+			trackLength,
+			secondLength;
 		var context = new (window.AudioContext || window.webkitAudioContext)();
 
-		factory.initAudio = function (data, processMode, duration) {
-			if (source) source.stop(0);
-
+		factory.initAudio = function (data, processMode, resetTimer) {
+			if (source) {
+				clearInterval(source.interval);
+				disconnect();
+				source = null;
+			}
+			if (resetTimer) {
+				position = 0;
+			}
 			source = context.createBufferSource();
 
 			if (context.decodeAudioData) {
 				context.decodeAudioData(data, function (buffer) {
 					source.buffer = buffer;
-					createAudio(processMode, duration);
+					createAudio(processMode, position);
 				}, function (e) {
 					console.error(e);
 				});
 			} else {
 				source.buffer = context.createBuffer(data, false);
-				createAudio(processMode, duration);
+				createAudio(processMode, position);
 			}
 		};
 
-		function createAudio(processMode, duration) {
+		function createAudio(processMode, position) {
 			// create low-pass filter
 			filterLowPass = context.createBiquadFilter();
 			source.connect(filterLowPass);
@@ -72,9 +81,17 @@
 			processor.onaudioprocess = karaoke;
 
 			// playback the sound
-			processMode == 'trackList' ? renderTracksBar() : '';
-			duration ? source.start(0, duration) : source.start(0);
 
+			var interval;
+			if (processMode == 'trackList') {
+				interval = renderTracksBar()
+			} else {
+				interval = () => {};
+			}
+			//position ? source.start(0, position) : source.start(0);
+			source.start(0, position);
+
+			source.interval = interval;
 			window.source = source;
 
 			setTimeout(disconnect, source.buffer.duration * 1000 + 1000);
@@ -100,11 +117,43 @@
 				output[i] = inputL[i] - inputR[i];
 			}
 		}
-
+ 		var slider;
 		function renderTracksBar() {
 			var $tracksBar = $('.tracks-bar');
+			trackLength = source.buffer.duration;
 			$tracksBar.css('visibility', 'visible');
+			slider = $tracksBar.find('input#slider');
+			slider.slider({
+				max: trackLength,
+				value: position,
+				formatter: function(value) {
+					var mins = Math.floor(value / 60);
+					if (mins < 10) {
+						mins = '0' + mins ;
+					}
+					var secs = value - mins*60;
+					if (secs < 10) {
+						secs = '0' + secs ;
+					}
+					return '' + mins + 'm:' + secs + 's';
+				},
+			}).on('slideStop', (newPosition) => {
+				console.log(newPosition);
+				position = newPosition.value;
+				//factory.initAudio(window.original, 'trackList', false);
+				return;
+			});
+			var interval = setInterval(() => {
+				var offset = ++position;
+				slider.slider('setValue', offset);
+			}, 1000);
+			setTimeout(() => {
+				clearInterval(interval)
+			}, trackLength * 1000);
+			return interval;
 		}
+
+
 
 		return factory;
 	}

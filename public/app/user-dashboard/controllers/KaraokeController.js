@@ -50,7 +50,7 @@
 
 			reader.onload = function(fileEvent) {
 				var data = fileEvent.target.result;
-				UtilKaraokeService.initAudio(data, 'fileUpload');
+				UtilKaraokeService.initAudio(data, 'fileUpload', true);
 				var dv = new jDataView(this.result);
 
 				if (dv.getString(3, dv.byteLength - 128) == 'TAG') {
@@ -158,10 +158,16 @@
 			var $nextItem = $(elem).parent().next().find('.song-item');
 
 			if(!$prevItem.length) {
-				$backBtn.prop( "disabled", true );
+				$backBtn.prop("disabled", true );
+			}
+			else {
+				$backBtn.prop("disabled", false );
 			}
 			if(!$nextItem.length) {
-				$forwardBtn.prop( "disabled", true );
+				$forwardBtn.prop("disabled", true );
+			}
+			else {
+				$forwardBtn.prop("disabled", false );
 			}
 
 			lastPlaylistItemNode = $(elem);
@@ -169,7 +175,7 @@
 			KaraokeService.getFile(urlFileName).then(
 				function(response) {
 					window.original = response;
-					UtilKaraokeService.initAudio(response, 'trackList');
+					UtilKaraokeService.initAudio(response, 'trackList', true);
 				}
 			)
 		}
@@ -189,13 +195,16 @@
 		function pauseTrack(e) {
 			window.source.stop(0);
 			window.source.disconnect(0);
-			$(this).replaceWith('<button class="play-btn"><span class="glyphicon glyphicon-play"></span></button>');
+			clearInterval(window.source.interval);
+			window.source = null;
+			$(this).replaceWith('<button type="button" title="Play/Resume" class="btn btn-default btn-circle btn-lg play-btn">' +
+				'<span class="glyphicon glyphicon-play"></span></button>');
 		}
 
 		function playTrack(e) {
-			var duration = 20;
-			UtilKaraokeService.initAudio(window.original, 'trackList', duration);
-			$(this).replaceWith('<button class="pause-btn"><span class="glyphicon glyphicon-pause"></span></button>');
+			UtilKaraokeService.initAudio(window.original, 'trackList', false);
+			$(this).replaceWith('<button type="button" title="Pause" class="btn btn-default btn-circle btn-lg pause-btn">' +
+				'<span class="glyphicon glyphicon-pause"></span></button>');
 		}
 	}
 })();
