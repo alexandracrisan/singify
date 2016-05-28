@@ -420,3 +420,11 @@
 .dropdown-menu .account-btn {
 	background-color: #00BD9B;
 }
+
+.container .nav.navbar-nav.navbar-right.pointer {
+	margin-right: 5%;
+}
+
+.container .nav.navbar-nav.navbar-right.home-page {
+	margin-right: 5%;
+}
