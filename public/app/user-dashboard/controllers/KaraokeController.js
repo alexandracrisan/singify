@@ -110,7 +110,7 @@
 					}
 					else {
 						response.forEach(function(val, index) {
-							songElem += '<li><a class="song-item pointer" data-filename="' + val.filename + '">'+ val.title +
+							songElem += '<li><a class="song-item pointer" data-filename="' + val._id + '">'+ val.title +
 								'<span class="sub_icon glyphicon glyphicon-play"></span></a></li>';
 						});
 					}

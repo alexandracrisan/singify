@@ -5,14 +5,17 @@ var MIME = {
 };
 var config = require('../../config');
 var FileStorage = require('../services/filestorage')({ type: config.filestore.readertype });
+var mongoose = require('mongoose');
+var Song = mongoose.model('Song');
 
 /**
  *  Module exports
  */
 module.exports.getByFilename = getByFilename;
+module.exports.getSongById = getSongById;
 
 function getByFilename(req, res, next) {
-	var filename = req.params.filename;
+	var filename = req.resources.filename;
 	var extension = filename.split(/[. ]+/).pop();
 
 	res.setHeader('Cache-Control', 'public, max-age=3600');
@@ -20,4 +23,25 @@ function getByFilename(req, res, next) {
 
 	// pipe file to response
 	FileStorage.serve(filename, res);
+}
+
+function getSongById(req, res, next) {
+	var fileId = req.params.id;
+
+	Song
+		.findOne({_id: fileId, user: req.user })
+		.exec(function(err, song) {
+			if (err) {
+				return next(err);
+			}
+
+			if(!song) {
+				return res.status(403).json({
+					message: 'Unauthorized!'
+				});
+			}
+
+			req.resources.filename = song.filename;
+			next();
+		});
 }

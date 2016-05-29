@@ -13,7 +13,6 @@
 		$scope.signin = function() {
 			SigninService.loginUser($scope.current_user_ui).then(
 				function(response) {
-					console.log(response);
 					SessionService.setCurrentUser(response);
 					$state.go('/dashboard');
 				},
