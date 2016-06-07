@@ -15,8 +15,8 @@
 					params: {
 						loggedUser: null
 					},
-					templateUrl: 'app/user-dashboard/partials/user-dashboard.html',
-					controller: 'KaraokeCtrl as karaokeCtrl'
+					templateUrl: 'app/presentation/partials/presentation.html',
+					controller: 'PresentationCtrl as presentationCtrl'
 				});
 
 			$locationProvider.html5Mode(true);
