@@ -1,6 +1,8 @@
 'use strict';
 
-var SONG_TYPES = ['audio/mp3', 'audio/ogg', 'audio/wav'];
+var SONG_TYPES = ['audio/mp3', 'audio/ogg', 'audio/wav', 'image/jpeg', 'image/png', 'video/mp4',
+	'video/quicktime', 'video/x-msvideo', 'video/x-ms-wmv', 'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+var MIMETYPE_PDF = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
 var _ = require('lodash');
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -9,6 +11,8 @@ var Song = mongoose.model('Song');
 var FileStorage = require('../services/filestorage')({
 	type: config.filestore.storagetype
 });
+var PDFImage = require('pdf-image').PDFImage;
+var im = require('imagemagick');
 
 module.exports.create = createPost;
 module.exports.getAllSongs = getAllSongs;
@@ -23,6 +27,9 @@ function createPost(req, res, next) {
 	var data = _.pick(req.body, ['title']);
 	data.user = req.user._id;
 
+	//console.log(req.body);
+	//console.log(req.file, 'fielleellele');
+
 	var postData = new Song(data);
 
 	if (req.file) {
@@ -33,14 +40,21 @@ function createPost(req, res, next) {
 
 		if (SONG_TYPES.indexOf(file.mimetype) == -1) {
 			return res.status(415).json({
-				message: 'Supported formats: .mp3, .ogg, .wav'
+				message: 'Supported formats: .mp3, .ogg, .wav, .jpeg, .jpg, .jpe, .png, .mp4, .mov, .avi, .wmv'
 			});
 		}
 
-		if(!postData.title) {
-			return res.status(400).json({
-				message: 'Title is required!'
-			});
+		if (MIMETYPE_PDF.indexOf(file.mimetype) > -1) {
+				console.log(file, 'in mimetype');
+			postData.filename = postData.hash + '.pdf';
+			//var pdfImage = new PDFImage(file.path);
+			//
+			//pdfImage.convertPage(0).then(function (imagePath) {
+			//	console.log(567, imagePath);
+			//}, function (err) {
+			//	console.log(err);
+			//});
+
 		}
 
 		FileStorage.store({

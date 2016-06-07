@@ -19,10 +19,10 @@ var SongSchema = new Schema({
 		ref: 'User',
 		required: true
 	},
-	title: {
-		type: String,
-		required: true
-	},
+	//title: {
+	//	type: String,
+	//	required: false
+	//},
 	filename: {
 		type: String
 	},

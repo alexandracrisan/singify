@@ -1,7 +1,8 @@
 'use strict';
 
 var MIME = {
-	mp3: 'audio/mpeg'
+	mp3: 'audio/mpeg',
+	pdf: 'application/pdf'
 };
 var config = require('../../config');
 var FileStorage = require('../services/filestorage')({ type: config.filestore.readertype });

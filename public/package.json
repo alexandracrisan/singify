@@ -18,6 +18,7 @@
     "angular": "^1.5.5",
     "angular-ui-router": "^0.2.18",
     "bootstrap": "^3.3.6",
+    "bootstrap-fileinput": "^4.2.8",
     "bootstrap-slider": "^7.1.0",
     "jquery": "^2.2.3",
     "jquery.mb.ytplayer": "^2.9.5"
