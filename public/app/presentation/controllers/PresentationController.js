@@ -100,8 +100,11 @@ var self = this;
 				data: formData,
 				success: function(data){
 					status.setProgress(100);
+					var $statusBar = $('.statusbar');
 
-					$("#status1").append("File upload Done<br>");
+					$statusBar.on('click', '.glyphicon-remove-circle', function() {
+						$statusBar.hide();
+					});
 				}
 			});
 
@@ -114,7 +117,7 @@ var self = this;
 			rowCount++;
 			var row="odd";
 			if(rowCount %2 ==0) row ="even";
-			this.statusbar = $("<div class='statusbar "+row+"'></div>");
+			this.statusbar = $("<div class='statusbar "+row+"'><span class='glyphicon glyphicon-remove-circle'></span></div>");
 			//this.filename = $("<div class='filename'></div>").appendTo(this.statusbar);
 			this.size = $("<div class='filesize'></div>").appendTo(this.statusbar);
 			this.progressBar = $("<div class='progressBar'><div></div></div>").appendTo(this.statusbar);
@@ -175,6 +178,7 @@ console.log(files[i].type);
 		}
 		$(document).ready(function() {
 			var obj = $("#dragandrophandler");
+
 			obj.on('dragenter', function (e) {
 				e.stopPropagation();
 				e.preventDefault();

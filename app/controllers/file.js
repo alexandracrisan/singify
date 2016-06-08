@@ -2,12 +2,15 @@
 
 var MIME = {
 	mp3: 'audio/mpeg',
-	pdf: 'application/pdf'
+	pdf: 'application/pdf',
+	jpeg: 'image/jpeg',
+	jpg: 'image/jpeg',
+	png: 'image/png'
 };
 var config = require('../../config');
 var FileStorage = require('../services/filestorage')({ type: config.filestore.readertype });
 var mongoose = require('mongoose');
-var Song = mongoose.model('Song');
+var Media = mongoose.model('Media');
 
 /**
  *  Module exports
@@ -29,7 +32,7 @@ function getByFilename(req, res, next) {
 function getSongById(req, res, next) {
 	var fileId = req.params.id;
 
-	Song
+	Media
 		.findOne({_id: fileId, user: req.user })
 		.exec(function(err, song) {
 			if (err) {

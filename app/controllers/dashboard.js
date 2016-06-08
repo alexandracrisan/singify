@@ -3,11 +3,12 @@
 var SONG_TYPES = ['audio/mp3', 'audio/ogg', 'audio/wav', 'image/jpeg', 'image/png', 'video/mp4',
 	'video/quicktime', 'video/x-msvideo', 'video/x-ms-wmv', 'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
 var MIMETYPE_PDF = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+var MIMETYPE_IMG = ['image/jpeg', 'image/png'];
 var _ = require('lodash');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var config = require('../../config');
-var Song = mongoose.model('Song');
+var Media = mongoose.model('Media');
 var FileStorage = require('../services/filestorage')({
 	type: config.filestore.storagetype
 });
@@ -30,7 +31,7 @@ function createPost(req, res, next) {
 	//console.log(req.body);
 	//console.log(req.file, 'fielleellele');
 
-	var postData = new Song(data);
+	var postData = new Media(data);
 
 	if (req.file) {
 		var file = req.file;
@@ -56,6 +57,18 @@ function createPost(req, res, next) {
 			//});
 
 		}
+		if (MIMETYPE_IMG.indexOf(file.mimetype) > -1) {
+			console.log(file, 'in mimetype img');
+			postData.filename = postData.hash + '.jpg';
+			//var pdfImage = new PDFImage(file.path);
+			//
+			//pdfImage.convertPage(0).then(function (imagePath) {
+			//	console.log(567, imagePath);
+			//}, function (err) {
+			//	console.log(err);
+			//});
+
+		}
 
 		FileStorage.store({
 			filepath: tempPath,
@@ -67,7 +80,7 @@ function createPost(req, res, next) {
 				return next(err);
 			}
 
-			Song.create(postData, function(err, post) {
+			Media.create(postData, function(err, post) {
 				if (err) {
 					return next(err);
 				}
@@ -83,7 +96,7 @@ function getAllSongs(req, res, next) {
 	query.sort = { createdAt: -1 };
 	query.find = {user: req.user._id};
 
-	Song
+	Media
 		.find(query.find)
 		.sort(query.sort)
 		.populate('user')

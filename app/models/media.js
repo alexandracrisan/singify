@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 
-var SongSchema = new Schema({
+var MediaSchema = new Schema({
 	hash: {
 		type: String,
 		unique: true,
@@ -32,4 +32,4 @@ var SongSchema = new Schema({
 	}
 });
 
-module.exports = mongoose.model('Song', SongSchema);
+module.exports = mongoose.model('Media', MediaSchema);

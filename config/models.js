@@ -5,7 +5,7 @@ module.exports.init = function (app) {
 
 	[
 		'user',
-		'song'
+		'media'
 	].forEach(function (model) {
 			require(modelsPath + model);
 		});

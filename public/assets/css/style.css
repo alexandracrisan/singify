@@ -7,7 +7,7 @@
 	bottom: 0;
 	left: 0;
 	overflow: hidden;
-	z-index: -100;
+	/*z-index: -100;*/
 }
 
 .fullscreen-bg__video {
@@ -499,6 +499,8 @@
 	padding:10px 10px 0 10px;
 	vertical-align:top;
 	margin-left: 16em;
+	background-color: #e4fffa;
+	border-radius: 2px;
 }
 
 .statusbar:nth-child(odd) {
