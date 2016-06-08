@@ -66,7 +66,6 @@
 	height: 0;
 }
 
-
 .droppable.dragover {
 	background: #286090;
 }
@@ -133,10 +132,6 @@
 	width: 100%;
 	height: auto;
 }
-
-/*#wrapper.active {*/
-	/*padding-left: 150px;*/
-/*}*/
 
 #wrapper.active #sidebar-wrapper {
 	left: 150px;
@@ -284,7 +279,6 @@
 	bottom: 0;
 	right: 0;
 	min-height: 110px;
-	/*background-color: #f1f1f1;*/
 	width: 100%;
 	padding-left: 168px;
 	visibility: hidden;
@@ -302,7 +296,6 @@
 }
 
 .btn.post-btn:hover {
-	/*color: #999;*/
 	opacity: 0.8;
 }
 
@@ -392,7 +385,7 @@
 	opacity: 0.8;
 }
 
-.navbar-right .dropdown .dropdown-toggle:hover{
+.navbar-right .dropdown .dropdown-toggle:hover {
 	color: #5f6260;
 }
 
@@ -463,8 +456,7 @@
 }
 
 /*stuff*/
-#dragandrophandler
-{
+#dragandrophandler {
 	width: 30%;
 	color: #92AAB0;
 	text-align: center;
@@ -480,6 +472,7 @@
 	text-shadow: 2px 2px 3px #9e9e9e;
 	border-radius: 8px;
 }
+
 .progressBar {
 	width: 100%;
 	height: 22px;
@@ -500,25 +493,25 @@
 	background-color:#00BD9B;
 	border-radius: 3px;
 }
-.statusbar
-{
+.statusbar {
 	min-height:25px;
 	width:30%;
 	padding:10px 10px 0 10px;
 	vertical-align:top;
 	margin-left: 16em;
 }
-.statusbar:nth-child(odd){
+
+.statusbar:nth-child(odd) {
 	background:#EBEFF0;
 }
-.filename
-{
+
+.filename {
 	display:inline-block;
 	vertical-align:top;
 	width:250px;
 }
-.filesize
-{
+
+.filesize {
 	display:inline-block;
 	vertical-align:top;
 	color:#9e9e9e;
@@ -526,7 +519,8 @@
 	margin-left:10px;
 	margin-right:5px;
 }
-.abort{
+
+.abort {
 	background-color:#A8352F;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
@@ -536,40 +530,6 @@
 	padding:4px 15px;
 	cursor:pointer;
 	vertical-align:top
-}
-
-
-div[flex="30"] {
-	background-color: #DFDFDF;
-}
-
-section[flex="40"] {
-	background-color: #D4E5FA;
-}
-section[flex="70"] {
-	background-color: #E8FCD6;
-}
-section[flex="20"] {
-	background-color: #FFD5E3;
-}
-section[flex=""] {
-	background-color: rgba(0, 128, 0, 0.35);
-}
-
-
-/* Important to set height for column layout */
-.boxWithHeight {
-	box-sizing: border-box;
-	height: 100%;
-}
-
-.a, section {
-	border: 5px solid rgba(85, 97, 85, 0.27);
-	margin: 5px;
-}
-
-section {
-	background-color: #dedede;
 }
 
 .video-container {
