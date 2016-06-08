@@ -5,7 +5,8 @@ var MIME = {
 	pdf: 'application/pdf',
 	jpeg: 'image/jpeg',
 	jpg: 'image/jpeg',
-	png: 'image/png'
+	png: 'image/png',
+	mp4: 'audio/mp4'
 };
 var config = require('../../config');
 var FileStorage = require('../services/filestorage')({ type: config.filestore.readertype });
