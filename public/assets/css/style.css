@@ -109,7 +109,7 @@
 #sidebar-wrapper {
 	margin-left: -150px;
 	left: 70px;
-	width: 170px;
+	width: 200px;
 	background: #222;
 	position: fixed;
 	height: 100%;
@@ -151,7 +151,7 @@
 	display: block;
 	float: left;
 	text-decoration: none;
-	width: 169px;
+	width: 200px;
 	background: #252525;
 	border-top: 1px solid #373737;
 	border-bottom: 1px solid #1A1A1A;
@@ -223,22 +223,22 @@
 	line-height: 65px;
 }
 
-@media (max-width:767px) {
-	#wrapper {
-		padding-left: 70px;
-		transition: all .4s ease 0s;
-	}
-	#sidebar-wrapper {
-		left: 70px;
-	}
-	#wrapper.active {
-		padding-left: 150px;
-	}
-	#wrapper.active #sidebar-wrapper {
-		left: 150px;
-		transition: all .4s ease 0s;
-	}
-}
+/*@media (max-width:767px) {*/
+	/*#wrapper {*/
+		/*padding-left: 70px;*/
+		/*transition: all .4s ease 0s;*/
+	/*}*/
+	/*#sidebar-wrapper {*/
+		/*left: 70px;*/
+	/*}*/
+	/*#wrapper.active {*/
+		/*padding-left: 150px;*/
+	/*}*/
+	/*#wrapper.active #sidebar-wrapper {*/
+		/*left: 150px;*/
+		/*transition: all .4s ease 0s;*/
+	/*}*/
+/*}*/
 
 /*scroll*/
 
@@ -465,24 +465,29 @@
 /*stuff*/
 #dragandrophandler
 {
-	border:2px dotted #0B85A1;
-	width:50%;
-	color:#92AAB0;
-	text-align:center;
-	vertical-align:middle;
-	padding: 20px;
-	margin-bottom:10px;
-	font-size:200%;
-	margin-top: 3em;
+	width: 30%;
+	color: #92AAB0;
+	text-align: center;
+	vertical-align: middle;
+	padding: 25px;
+	margin-bottom: 10px;
+	font-size: 200%;
+	margin-top: 2.6em;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	margin-left: 8em;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	text-shadow: 2px 2px 3px #9e9e9e;
+	border-radius: 8px;
 }
 .progressBar {
-	width: 200px;
+	width: 100%;
 	height: 22px;
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	overflow: hidden;
 	display:inline-block;
-	margin:0px 10px 5px 5px;
+	margin-bottom: 5px;
 	vertical-align:top;
 }
 
@@ -492,15 +497,16 @@
 	text-align: right;
 	line-height: 22px; /* same as #progressBar height if we want text middle aligned */
 	width: 0;
-	background-color: #0ba1b5; border-radius: 3px;
+	background-color:#00BD9B;
+	border-radius: 3px;
 }
 .statusbar
 {
-	border-top:1px solid #A9CCD1;
 	min-height:25px;
-	width:50%;
-	padding:10px 10px 0px 10px;
+	width:30%;
+	padding:10px 10px 0 10px;
 	vertical-align:top;
+	margin-left: 16em;
 }
 .statusbar:nth-child(odd){
 	background:#EBEFF0;
@@ -515,7 +521,7 @@
 {
 	display:inline-block;
 	vertical-align:top;
-	color:#30693D;
+	color:#9e9e9e;
 	width:100px;
 	margin-left:10px;
 	margin-right:5px;
@@ -530,4 +536,86 @@
 	padding:4px 15px;
 	cursor:pointer;
 	vertical-align:top
+}
+
+
+div[flex="30"] {
+	background-color: #DFDFDF;
+}
+
+section[flex="40"] {
+	background-color: #D4E5FA;
+}
+section[flex="70"] {
+	background-color: #E8FCD6;
+}
+section[flex="20"] {
+	background-color: #FFD5E3;
+}
+section[flex=""] {
+	background-color: rgba(0, 128, 0, 0.35);
+}
+
+
+/* Important to set height for column layout */
+.boxWithHeight {
+	box-sizing: border-box;
+	height: 100%;
+}
+
+.a, section {
+	border: 5px solid rgba(85, 97, 85, 0.27);
+	margin: 5px;
+}
+
+section {
+	background-color: #dedede;
+}
+
+.video-container {
+	width: 30%;
+	color: #92AAB0;
+	text-align: center;
+	vertical-align: middle;
+	padding: 25px;
+	margin-bottom: 10px;
+	font-size: 200%;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	margin-left: 8em;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	text-shadow: 2px 2px 3px #9e9e9e;
+	border-radius: 8px;
+}
+
+.container-btn .md-primary.md-default {
+	background-color: #00a486;
+}
+
+.container-btn .md-default.md-button.md-primary.md-raised:not([disabled]):hover {
+	background-color: #00a486;
+}
+
+.container-btn {
+	width: 30%;
+	margin-bottom: 10px;
+	font-size: 200%;
+	padding-top: 40px;
+	margin-left: 8em;
+}
+
+.presentation-container {
+	width: 30%;
+	color: #92AAB0;
+	text-align: center;
+	vertical-align: middle;
+	padding: 25px;
+	margin-bottom: 10px;
+	font-size: 200%;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	margin-left: 8em;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	text-shadow: 2px 2px 3px #9e9e9e;
+	border-radius: 8px;
 }

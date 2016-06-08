@@ -115,7 +115,7 @@ var self = this;
 			var row="odd";
 			if(rowCount %2 ==0) row ="even";
 			this.statusbar = $("<div class='statusbar "+row+"'></div>");
-			this.filename = $("<div class='filename'></div>").appendTo(this.statusbar);
+			//this.filename = $("<div class='filename'></div>").appendTo(this.statusbar);
 			this.size = $("<div class='filesize'></div>").appendTo(this.statusbar);
 			this.progressBar = $("<div class='progressBar'><div></div></div>").appendTo(this.statusbar);
 			this.abort = $("<div class='abort'>Abort</div>").appendTo(this.statusbar);
@@ -135,7 +135,7 @@ var self = this;
 					sizeStr = sizeKB.toFixed(2)+" KB";
 				}
 
-				this.filename.html(name);
+				//this.filename.html(name);
 				this.size.html(sizeStr);
 			}
 			this.setProgress = function(progress)
@@ -178,7 +178,11 @@ console.log(files[i].type);
 			obj.on('dragenter', function (e) {
 				e.stopPropagation();
 				e.preventDefault();
-				$(this).css('border', '2px solid #0B85A1');
+				var styles = {
+					'background-color': '#00BD9B',
+					'color': '#5f6260'
+				};
+				$(this).css(styles);
 			});
 
 			obj.on('dragover', function (e) {
@@ -186,9 +190,14 @@ console.log(files[i].type);
 				e.preventDefault();
 			});
 
+			var styles = {
+				'color': '#92AAB0',
+				'background-color': 'white'
+			};
+
 			obj.on('drop', function (e) {
 
-				$(this).css('border', '2px dotted #0B85A1');
+				$(this).css(styles);
 				e.preventDefault();
 				var files = e.originalEvent.dataTransfer.files;
 
@@ -204,7 +213,7 @@ console.log(files[i].type);
 			$(document).on('dragover', function (e) {
 				e.stopPropagation();
 				e.preventDefault();
-				obj.css('border', '2px dotted #0B85A1');
+				obj.css(styles);
 			});
 
 			$(document).on('drop', function (e) {

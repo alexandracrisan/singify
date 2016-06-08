@@ -1,6 +1,15 @@
 
 <!-- fixed navigation bar -->
 <div id="wrapper" class="active">
+	<div id="sidebar-wrapper">
+		<ul id="sidebar_menu" class="sidebar-nav">
+			<li class="sidebar-brand"><a id="menu-toggle" href="#" ng-click="karaokeCtrl.toggleMenu($event)">Library</a></li>
+		</ul>
+		<ul class="sidebar-nav" id="sidebar">
+
+		</ul>
+	</div>
+
 	<!-- Page content -->
 	<div id="page-content-wrapper">
 		<!-- Keep all page content within the page-content inset div! -->
@@ -30,13 +39,19 @@
 						</div>
 					</div>
 				</div>
+				<div>
+					<div id="dragandrophandler">Drag & Drop Files Here</div>
+					<br><br>
+					<div id="status1"></div>
+					<div class="video-container">Video</div>
+					<div class="container-btn">
+						<md-button class="md-default md-primary md-raised demo-dialog-open-button pull-right">
+							RECORD
+						</md-button>
+					</div>
+				</div>
+				<!--<div class="presentation-container">rgg</div>-->
 
-				<!--<input id="upload-input" name="inputficons2[]" multiple type="file" class="file-loading">-->
-
-
-				<div id="dragandrophandler">Drag & Drop Files Here</div>
-				<br><br>
-				<div id="status1"></div>
 			</div>
 		</div>
 	</div>

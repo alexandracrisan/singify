@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	angular.module('app', ['ui.router'])
+	angular.module('app', ['ui.router', 'ngMaterial'])
 		.config(function ($stateProvider, $urlRouterProvider,  $locationProvider) {
 			$urlRouterProvider.otherwise('/');
 
