@@ -4,6 +4,7 @@ var SONG_TYPES = ['audio/mp3', 'audio/ogg', 'audio/wav', 'image/jpeg', 'image/pn
 	'video/quicktime', 'video/x-msvideo', 'video/x-ms-wmv', 'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
 var MIMETYPE_PDF = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
 var MIMETYPE_IMG = ['image/jpeg', 'image/png'];
+var MIMETYPE_VIDS = ['video/mp4', 'video/quicktime', 'video/x-msvideo', 'video/x-ms-wmv'];
 var _ = require('lodash');
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -25,11 +26,8 @@ function createPost(req, res, next) {
 			tempPath,
 			extension;
 
-	var data = _.pick(req.body, ['title']);
+	var data = {};
 	data.user = req.user._id;
-
-	//console.log(req.body);
-	//console.log(req.file, 'fielleellele');
 
 	var postData = new Media(data);
 
@@ -58,16 +56,11 @@ function createPost(req, res, next) {
 
 		}
 		if (MIMETYPE_IMG.indexOf(file.mimetype) > -1) {
-			console.log(file, 'in mimetype img');
 			postData.filename = postData.hash + '.jpg';
-			//var pdfImage = new PDFImage(file.path);
-			//
-			//pdfImage.convertPage(0).then(function (imagePath) {
-			//	console.log(567, imagePath);
-			//}, function (err) {
-			//	console.log(err);
-			//});
+		}
 
+		if (MIMETYPE_VIDS.indexOf(file.mimetype) > -1) {
+			postData.filename = postData.hash + '.mp4';
 		}
 
 		FileStorage.store({
