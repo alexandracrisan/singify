@@ -105,6 +105,44 @@ var self = this;
 					$statusBar.on('click', '.glyphicon-remove-circle', function() {
 						$statusBar.hide();
 					});
+
+					var $sidebar = $('#sidebar');
+					var $songElem = '';
+					var dataFileName = data._id;
+					var url = UtilService.baseUrl+ '/files/' + dataFileName;
+					$sidebar.mCustomScrollbar('destroy');
+console.log(data)
+					if(!data) {
+						$songElem += '<li><a class="available">No files available</a></li>'
+					}
+					else {
+
+						if(data.filename.indexOf('.jpg') > -1) {
+							$songElem += '<li><a class="pointer"</a><img src="' + url +'" class="file-content"></li>';
+							//showCropOnHover($($songElem).find('.file-content'));
+						}
+						if(data.filename.indexOf('.mp3') > -1) {
+							$songElem += '<li><a class="pointer"</a><audio controls class="file-content"><source src="' + url +'"></audio></li>';
+						}
+						if(data.filename.indexOf('.mp4') > -1) {
+							$songElem += '<li><a class="pointer"</a><video controls class="file-content"><source src="' + url +'"></video></li>';
+						}
+					}
+
+					$sidebar.append($songElem);
+					//var urlFileName = UtilService.baseUrl+ '/files/' + dataFileName;
+					//
+					//PresentationService.getFile(urlFileName).then(
+					//	function(response) {
+					//		loading();
+					//
+					//	}
+					//)
+					$sidebar.mCustomScrollbar({
+						theme: 'rounded-dots',
+						scrollInertia: 1400
+					});
+
 				}
 			});
 
@@ -143,8 +181,8 @@ var self = this;
 			}
 			this.setProgress = function(progress)
 			{
-				var progressBarWidth =progress*this.progressBar.width()/ 100;
-				this.progressBar.find('div').animate({ width: progressBarWidth }, 10).html(progress + "% ");
+				var progressBarWidth =progress*this.progressBar.width();
+				this.progressBar.find('div').animate({ width: '100%' }, 10).html(progress + "% ");
 				if(parseInt(progress) >= 100)
 				{
 					this.abort.hide();
@@ -226,5 +264,21 @@ console.log(files[i].type);
 			});
 		});
 
+		function loading() {
+			// add the overlay with loading image to the page
+			var over = '<div id="overlay">' +
+				'<img id="loading" src="http://i201.photobucket.com/albums/aa236/Mottie1/testsite/icons/loading3.gif">' +
+				'</div>';
+			$(over).appendTo('body');
+		}
+
+		//function showCropOnHover($songElem) {
+		//	console.log($songElem);
+			$('.file-content').mouseenter(function() {
+				console.log(3);
+				var buttonCrop = '<button type="button" class="btn btn-default btn-circle btn-lg crop-btn" title="Crop"><span class="glyphicon glyphicon-crop"></span></button>';
+				$(this).append(buttonCrop);
+			});
+		//}
 	}
 })();

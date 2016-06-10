@@ -24,6 +24,7 @@
     "bootstrap": "^3.3.6",
     "bootstrap-fileinput": "^4.2.8",
     "bootstrap-slider": "^7.1.0",
+    "cropper": "^2.3.2",
     "jquery": "^2.2.3",
     "jquery.mb.ytplayer": "^2.9.5"
   }

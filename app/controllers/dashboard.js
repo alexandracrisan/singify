@@ -104,8 +104,8 @@ function getAllSongs(req, res, next) {
 }
 
 function jsonPost(req, res, next) {
-	//res.json(req.resources.post);
-	res.redirect('/dashboard');
+	res.json(req.resources.post);
+	//res.redirect('/dashboard');
 }
 
 function jsonSongs(req, res, next) {
