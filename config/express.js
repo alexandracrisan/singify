@@ -52,6 +52,7 @@ function initExpress(app) {
 		res.locals.currentUser = req.user;
 
 		res.locals.baseUrl = config.baseUrl;
+		req.resources.basePath = root;
 		next();
 	});
 

@@ -127,6 +127,9 @@ console.log(data)
 						if(data.filename.indexOf('.mp4') > -1) {
 							$songElem += '<li><a class="pointer"</a><video controls class="file-content"><source src="' + url +'"></video></li>';
 						}
+						if(data.filename.indexOf('.pdf') > -1) {
+							//$songElem += '<li><a class="pointer"</a><video controls class="file-content"><source src="' + url +'"></video></li>';
+						}
 					}
 
 					$sidebar.append($songElem);
