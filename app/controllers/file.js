@@ -13,7 +13,7 @@ var FileStorage = require('../services/filestorage')({ type: config.filestore.re
 var mongoose = require('mongoose');
 var Media = mongoose.model('Media');
 var PDFImage = require("pdf-image").PDFImage;
-var exec = require("child_process").exec;
+var easyimg = require('easyimage');
 
 /**
  *  Module exports
@@ -56,20 +56,41 @@ function getSongById(req, res, next) {
 }
 
 function getPage(req, res, next) {
-	var pdfPath = req.resources.filename;
+	var pdfPath = req.resources.writablePath + req.resources.filename;
 	var extension = pdfPath.split(/[. ]+/).pop();
 	var pageNumber = req.params.page;
-	var changeDir = req.resources.writablePath + pdfPath;
+	//var currentPage = 0;
+	//var eof = false;
+	//var processFile = (pageIndex) => {
+	//	var src = pdfPath + '[' + pageIndex +']';
+	//	var dest = pdfPath + '-' + pageIndex +'.png';
+	//	var cmd = 'convert \"' + src  + '\" \"' + dest + '\"';
+	//	//console.log(cmd);
+	//	easyimg.exec(cmd, function(err, stdout, stderr) {
+	//		console.log('oricum nu intra');
+	//	}).then(function () {
+	//		currentPage = pageIndex++;
+	//		if (!eof) {
+	//			processFile(pageIndex);
+	//		}
+	//	}, function (err) {
+	//		eof = true;
+	//		currentPage = pageIndex++;
+	//		res.json({'pageCount': currentPage});
+	//	});
+	//}
+	//
+	//processFile(currentPage);
 
-
-	var pdfImage = new PDFImage(changeDir);
-	pdfImage.convertPage(pageNumber).then(function (imagePath) {
+	//res.json({'pageCount': currentPage});
+	var dest = pdfPath + '-' + pageNumber +'.png';
+	//var cmd = 'convert \"' + src  + '\" \"' + dest + '\"';
+	//easyimg.exec(cmd, function(err, stdout, stderr) {
+	//	console.log('oricum nu intra');
+	//}).then(function () {
+	//	console.log(dest);
 		res.setHeader('Cache-Control', 'public, max-age=3600');
-		res.setHeader('Content-Type', MIME[extension]+';charset=UTF-8');
+		res.setHeader('Content-Type', MIME['png']+';charset=UTF-8');
 		//res.sendFile(imagePath);
-		FileStorage.serve(imagePath, res);
-	}, function (err) {
-		res.status(500).send(err);
-
-	});
+		FileStorage.serve(req.resources.filename + '-' + pageNumber +'.png', res);
 }
